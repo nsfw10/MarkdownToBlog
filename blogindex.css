@@ -1,0 +1,17 @@
+#window {
+  height: 650px;
+  text-align: center;
+  overflow: hidden;
+}
+#window img {
+  display: inline-block;
+  height: 100%;
+  margin: 0 -100%;
+}
+
+#column {
+  background-color: #fafce7;
+}
+#columnContent {
+  max-width: 910px;
+}
