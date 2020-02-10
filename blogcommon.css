@@ -13,6 +13,9 @@ a {
 img {
   display: block;
 }
+body {
+  font-family: 思源宋体, 思源黑体, 微软雅黑, 宋体, Arial;
+}
 
 /* 开始操作 */
 .l {
