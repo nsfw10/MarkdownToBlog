@@ -70,7 +70,7 @@ html body {
 #logo h1 {
   /* line-height: 70px; */
   font-size: 40px;
-  font-family: 思源宋体;
+  font-family: 思源宋体,宋体;
   color: #aabcb2;
   font-weight: 900;
 }
