@@ -33,13 +33,15 @@
   overflow: hidden;
   background-color: #0d1113d2;
   height: 95%;
+  width: 95%;
   margin: 1% auto;
   max-width: 910px;
 }
 #columnTitle{
   margin: 24px auto 5px auto;
   padding-bottom: 10px;
-  width: 400px ;
+  width: 100%;
+  max-width: 400px ;
   border-bottom:1px solid #abbbaa;
 }
 #columnTitle h2{
@@ -57,56 +59,67 @@
 }
 
 #columnContent{
-  margin: 20px 5%;
+  margin: 20px 10px;
   position: relative;
+  overflow: hidden;
 }
 #columnSelfie{
-  width: 30%;
+  width: 25%;
   height: 100%;
-  min-width: 120px;
-  position: absolute;
+  /* min-width: 200px; */
+  min-height: 270px;
+  min-width: 220px;
+  position: relative;
+  /* position: absolute;
   top: 50%;
-  transform: translate(0, -50%);
+  transform: translate(0, -50%);*/
+  /* overflow: hidden;  */
 }
 #columnSelfie img{
-  overflow: hidden;
   box-sizing: border-box;
-  width: 90%;
-  max-width: 144px;
+  width: 100%;
+  /* min-width: 160px; */
+  max-width: 160px;
   padding: 8px;
   border: 5px solid #353c35;
   background-color: white;
   position: absolute;
   top: 50%;
-  left: 20%;
-  transform: translate(-20%, -50%);
+  /* left: 50%; */
+  right: 0;
+  transform: translate(0, -50%);
+  /* margin-right: 85px; */
 }
 #columnContent ul{
-  width: 70%;
+  position: relative;
+  width: 75%;
+  min-width: 336px;
 }
 #columnContent li{
   margin: 15px 0;
   position: relative;
 }
+#columnContent li div{
+  width:20%;
+  min-width: 75px;
+  position: absolute;
+  top: 50%;
+  transform: translate(0, -50%);
+}
 #columnContent li h3{
-  float: left;
+  float: right;
   font-size: 30px;
   line-height: 30px;
   color: #95977c;
-  position: absolute;
-  top: 50%;
-  transform: translate(0, -50%);
-  width: 20%;
   min-width: 60px;
-  margin: 0 10px;
+  margin-right: 7px;
 }
 #columnContent li img{
-  float: left;
-  position: absolute;
+  float: right;
+  /* position: absolute;
   top: 50%;
   left: 22%;
-  transform: translate(0, -50%);
-  margin:0 10px;
+  transform: translate(0, -50%); */
 }
 #columnContent li p {
   float: right;
@@ -117,6 +130,6 @@
   max-height: 90px;
   overflow: auto;
   color: #eff7ef;
-  width: 80%;
+  width: 75%;
   margin-left: 10px;
 }

@@ -114,3 +114,22 @@ html body {
 #head ul li a:hover {
   color: #c9dfd3;
 }
+
+#foot {
+  z-index: 10;
+  background-color: #3b423b;
+  /* height: 70px; */
+  box-shadow: 0 -10px/*偏移量*/
+  50px/* 模糊距离 */
+  5px/* 阴影尺寸 */
+  black;
+  min-height: 35px;
+  text-align: center;
+  overflow: hidden;
+}
+#foot p{
+  color: #eff2f0;
+  font-size: 10px;
+  font-weight: 200;
+  margin: 10px auto 0 auto;
+}
