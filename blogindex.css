@@ -13,13 +13,13 @@
   background: url("img/columnBG.png") center bottom;
   height: 424px;
   overflow: hidden;
+  position: relative;
 }
-
 #columnBox {
   overflow: hidden;
   background-color: #0d1113d2;
   height: 95%;
-  margin: 13px auto 5px auto;
+  margin: 1% auto;
   max-width: 910px;
 }
 #columnTitle{
@@ -39,31 +39,54 @@
   line-height: 10px;
   font-weight: 200;
   text-align: center;
-  color: #e5e3ce;
+  color: #979685;
 }
 
 #columnContent{
-  margin: 20px 60px;
+  margin: 20px 5%;
+  position: relative;
+}
+#columnSelfie{
+  width: 30%;
+  position: absolute;
+  top: 50%;
+  transform: translate(0, -50%);
 }
 #columnSelfie img{
-  height: 200px;
+  overflow: hidden;
+  max-height: 200px;
   padding: 8px;
   border: 5px solid #353c35;
-  margin-top: 18px;
   background-color: white;
+  position: absolute;
+  top: 50%;
+  left: 20%;
+  transform: translate(0, -50%);
 }
 #columnContent ul{
-  width: 600px;
+  width: 70%;
 }
 #columnContent li{
   margin: 10px 0;
+  position: relative;
 }
 #columnContent li h3{
   float: left;
   font-size: 30px;
   line-height: 30px;
   color: #95977c;
-  margin:16px;
+  position: absolute;
+  top: 50%;
+  transform: translate(0, -50%);
+  margin: 0 10px;
+}
+#columnContent li img{
+  float: left;
+  position: absolute;
+  top: 50%;
+  left: 15%;
+  transform: translate(0, -50%);
+  margin:0 10px;
 }
 #columnContent li p {
   float: right;
@@ -71,6 +94,9 @@
   font-weight: 300;
   font-size: 18px;
   line-height: 30px;
+  max-height: 90px;
+  overflow: auto;
   color: #eff7ef;
   width: 80%;
+  margin-left: 10px;
 }
