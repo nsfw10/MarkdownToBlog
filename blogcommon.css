@@ -83,8 +83,8 @@ body {
   left: 8px;
   color: #eff2f0;
   font-size: 16px;
-  font-family: 思源黑体;
   font-weight: 200;
+  font-family: 思源黑体;
   /* height: 70px; */
 }
 
@@ -98,6 +98,7 @@ body {
   line-height: 18px;
   padding: 0 21px;
   border-left: 1px solid #6a7c6e;
+  font-family: 思源黑体，微软雅黑, 黑体;
 }
 
 #head ul:last-child {
