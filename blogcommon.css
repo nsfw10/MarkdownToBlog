@@ -18,8 +18,10 @@ img {
   display: block;
 }
 
-body {
+html body {
   font-family: 思源宋体, 思源黑体, 微软雅黑, 宋体, Arial;
+  overflow-x:hidden;
+  width:100%;
 }
 
 /* 开始操作 */
@@ -60,9 +62,9 @@ body {
 }
 
 #logo {
-  margin-left: 25px;
+  margin-left: 2%;
   /* height: 68.5px; */
-  width: 400px;
+  max-width: 400px;
 }
 
 #logo h1 {
