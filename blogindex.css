@@ -10,8 +10,32 @@
 }
 
 #column {
-  background-color: #fafce7;
+  background: url("img/columnBG.png") center bottom;
+  height: 424px;
+  overflow: hidden;
 }
 #columnContent {
+  overflow: hidden;
+  background-color: #0d1113d2;
+  height: 90%;
+  margin: 13px auto;
   max-width: 910px;
+}
+#columnTitle{
+  margin: 24px auto 0 auto;
+  padding-bottom: 10px;
+  width: 500px ;
+  border:10px #ffffff;
+}
+#columnTitle h2{
+  font-size: 36px;
+  line-height: 36px;
+  text-align: center;
+  color: #e5e3ce;
+}
+#columnTitle+p{
+  font-size: 10px;
+  font-weight: 200;
+  text-align: center;
+  color: #e5e3ce;
 }
