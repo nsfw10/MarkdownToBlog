@@ -25,10 +25,8 @@ function keyDown(e) {
     if (e.key == "Shift"){
         oping = false;
         fastFall = true;//强行进入检查
-        let i=30;
-        while(!blockNow.settled && i>0){
+        while(!blockNow.settled){
             blockNow.fall();
-            i--;
             console.log(blockNow.settled);
         }
         blockNow = new Block();
@@ -66,6 +64,7 @@ Map.prototype.erase = function () {
             }
             i++;
         }
+        full = true;
     }
 }
 
