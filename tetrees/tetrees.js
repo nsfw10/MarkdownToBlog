@@ -9,8 +9,8 @@ let sect = document.querySelector("section");
 let para = document.createElement('p');
 sect.appendChild(para);
 
-function random(bottom,top){
-    return bottom+Math.floor(Math.random()*(top-bottom));//不含top;
+function random(bottom, top) {
+    return bottom + Math.floor(Math.random() * (top - bottom));//不含top;
 }
 
 let oping = false;
@@ -26,15 +26,19 @@ function keyDown(e) {
         blockNow.prlmove("r");
     if (e.key == "s" || e.key == "S")
         blockNow.fall();
-    if (e.key == "Shift"){
+    if (e.key == "Shift") {
         oping = false;
         fastFall = true;//强行进入检查
-        while(!blockNow.settled){
+        while (!blockNow.settled) {
             blockNow.fall();
             console.log(blockNow.settled);
         }
         blockNow = new Block();
     }
+    if (e.key == "z" || e.key == "Z")
+        blockNow.spin("z");
+    if (e.key == "x" || e.key == "X")
+        blockNow.spin("x");
     para.textContent = "KeyboardInputLog:  " + e.key;
 }
 document.addEventListener("keyup", keyUp, false);
@@ -76,24 +80,24 @@ let display = []
 map = new Map();
 
 const blockMetaData = [//坐标第二列是旋转中心
-    ["O",[2,4],[2,5],[3,4],[3,5]],
-    ["I",[0,4],[1,4],[2,4],[3,4]],
-    ["J",[1,4],[2,4],[3,4],[3,3]],
-    ["L",[1,4],[2,4],[3,4],[3,5]],
-    ["Z",[1,4],[2,4],[2,5],[3,5]],
-    ["S",[1,5],[2,5],[2,4],[3,4]],
-    ["T",[2,4],[3,4],[3,3],[3,5]]
+    ["O", [2, 4], [2, 5], [3, 4], [3, 5]],
+    ["I", [0, 4], [1, 4], [2, 4], [3, 4]],
+    ["J", [1, 4], [2, 4], [3, 4], [3, 3]],
+    ["L", [1, 4], [2, 4], [3, 4], [3, 5]],
+    ["Z", [1, 4], [2, 4], [2, 5], [3, 5]],
+    ["S", [1, 5], [2, 5], [2, 4], [3, 4]],
+    ["T", [2, 4], [3, 4], [3, 3], [3, 5]]
 ]
 
 function Block() {
-    let blockPos = random(0,7);
+    let blockPos = random(0, 7);
     this.kind = blockMetaData[blockPos][0];
     this.spin = 1;//旋转了一次
     this.occup = [
-        [blockMetaData[blockPos][1][0],blockMetaData[blockPos][1][1]],
-        [blockMetaData[blockPos][2][0],blockMetaData[blockPos][2][1]],
-        [blockMetaData[blockPos][3][0],blockMetaData[blockPos][3][1]],
-        [blockMetaData[blockPos][4][0],blockMetaData[blockPos][4][1]]
+        [blockMetaData[blockPos][1][0], blockMetaData[blockPos][1][1]],
+        [blockMetaData[blockPos][2][0], blockMetaData[blockPos][2][1]],
+        [blockMetaData[blockPos][3][0], blockMetaData[blockPos][3][1]],
+        [blockMetaData[blockPos][4][0], blockMetaData[blockPos][4][1]]
     ];//行，列
     this.settled = false;
 };
@@ -102,7 +106,7 @@ let blockNow = new Block();
 Block.prototype.settleCheck = function () {
     checkTime = new Date();
     //console.log(checkTime - lastOpTime);
-    if (fastFall||(checkTime - lastOpTime >= 300 && oping == false)) {
+    if (fastFall || (checkTime - lastOpTime >= 300 && oping == false)) {
         for (let i = 0; i < blockNow.occup.length && !blockNow.settled; i++) {
             if (this.occup[i][0] >= 23) blockNow.settled = true;
             if (map.record[(this.occup[i][0] + 1) * 10 + this.occup[i][1]] >= 1) blockNow.settled = true;
@@ -113,7 +117,7 @@ Block.prototype.settleCheck = function () {
             map.record[blockNow.occup[i][0] * 10 + blockNow.occup[i][1]] = 1;
         }
         map.erase();
-        if(!fastFall){
+        if (!fastFall) {
             blockNow = new Block();
             console.log(blockNow);
         }//防止陷入死循环
@@ -150,6 +154,33 @@ Block.prototype.prlmove = function (direction) {
         }
         for (let i = 0; i < blockNow.occup.length && !blockNow.settled && opLegal; i++)
             blockNow.occup[i][1]++;
+    }
+}
+
+const spinTest3 = [
+    [[0,0],[-1,0],[-1,1],[0,-2],[-1,-2]],//0-R
+    [[0,0],[1,0],[1,-1],[0,2],[1,2]],//R-2
+    [[0,0],[1,0],[1,1],[0,-2],[1,-2]],//2-L
+    [[0,0],[-1,0],[-1,-1],[0,2],[-1,2]]//L-0
+]
+
+Block.prototype.spin = function (direction) {
+    //let opLegal = true;
+    switch (blockNow.kind) {
+        case "O":
+            break;
+        case "L":
+            if (direction == "z") {
+            }
+            else if (direction == "x") {
+            }
+            break;
+        default:
+            if (direction == "z") {
+            }
+            else if (direction == "x") {
+            }
+            break;
     }
 }
 
