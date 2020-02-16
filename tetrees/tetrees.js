@@ -54,6 +54,9 @@ function Map() {
     for (let i = 0; i < 240; i++) {
         this.record[i] = -1;
     }
+    for(let i=240; i<250;i++){
+        this.record[i] = 1;
+    }
 }
 
 Map.prototype.erase = function () {
@@ -108,7 +111,7 @@ Block.prototype.settleCheck = function () {
     //console.log(checkTime - lastOpTime);
     if (fastFall || (checkTime - lastOpTime >= 300 && oping == false)) {
         for (let i = 0; i < blockNow.occup.length && !blockNow.settled; i++) {
-            if (this.occup[i][0] >= 23) blockNow.settled = true;
+            //if (this.occup[i][0] >= 23) blockNow.settled = true;
             if (map.record[(this.occup[i][0] + 1) * 10 + this.occup[i][1]] >= 1) blockNow.settled = true;
         }
     }
@@ -128,7 +131,7 @@ Block.prototype.fall = function () {
     //console.log(this.occup[1]);
     let opLegal = true;
     for (let i = 0; i < 4 && !blockNow.settled && opLegal; i++) {
-        if (this.occup[i][0] >= 23) opLegal = false;
+        //if (this.occup[i][0] >= 23) opLegal = false;
         if (map.record[(this.occup[i][0] + 1) * 10 + this.occup[i][1]] >= 1) opLegal = false;
     }
     for (let i = 0; i < 4 && !blockNow.settled && opLegal; i++) {
@@ -185,8 +188,8 @@ Block.prototype.spin = function (direction) {
 }
 
 function mapForm() {
-    for (let i = 40; i < map.record.length; i++) {
-        display[i - 40] = map.record[i];
+    for (let i = 0; i < 200; i++) {
+        display[i] = map.record[i+40];
     }
     for (let i = 0; i < blockNow.occup.length; i++) {
         display[(blockNow.occup[i][0] - 4) * 10 + blockNow.occup[i][1]] = 0;
