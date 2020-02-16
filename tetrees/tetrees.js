@@ -10,6 +10,7 @@ let para = document.createElement('p');
 sect.appendChild(para);
 
 let oping = false;
+let fastFall = false;
 let lastOpTime = new Date();
 //键盘监听
 document.addEventListener("keydown", keyDown, false);
@@ -21,12 +22,24 @@ function keyDown(e) {
         blockNow.prlmove("r");
     if (e.key == "s" || e.key == "S")
         blockNow.fall();
+    if (e.key == "Shift"){
+        oping = false;
+        fastFall = true;//强行进入检查
+        let i=30;
+        while(!blockNow.settled && i>0){
+            blockNow.fall();
+            i--;
+            console.log(blockNow.settled);
+        }
+        blockNow = new Block();
+    }
     para.textContent = "KeyboardInputLog:  " + e.key;
 }
 document.addEventListener("keyup", keyUp, false);
 function keyUp(e) {
     lastOpTime = new Date();
     oping = false;
+    fastFall = false;
 }
 //document.addEventListener("keypress", Op, false);
 
@@ -70,7 +83,7 @@ let blockNow = new Block();
 Block.prototype.settleCheck = function () {
     checkTime = new Date();
     //console.log(checkTime - lastOpTime);
-    if (checkTime - lastOpTime >= 300 && oping == false) {
+    if (fastFall||(checkTime - lastOpTime >= 300 && oping == false)) {
         for (let i = 0; i < blockNow.occup.length && !blockNow.settled; i++) {
             if (this.occup[i][0] >= 23) blockNow.settled = true;
             if (map.record[(this.occup[i][0] + 1) * 10 + this.occup[i][1]] >= 1) blockNow.settled = true;
@@ -81,12 +94,13 @@ Block.prototype.settleCheck = function () {
             map.record[blockNow.occup[i][0] * 10 + blockNow.occup[i][1]] = 1;
         }
         map.erase();
-        blockNow = new Block();
+        if(!fastFall) blockNow = new Block();//防止陷入死循环
     }
+
 }
 
 Block.prototype.fall = function () {
-    //console.log(this.occup);
+    //console.log(this.occup[1]);
     let opLegal = true;
     for (let i = 0; i < 4 && !blockNow.settled && opLegal; i++) {
         if (this.occup[i][0] >= 23) opLegal = false;
@@ -142,7 +156,7 @@ function draw() {
         else if (display[i] == 1) {
             ctx.beginPath();
             ctx.rect(UNIT_SIZE * (i % 10), UNIT_SIZE * Math.floor(i / 10), UNIT_SIZE, UNIT_SIZE);
-            ctx.fillStyle = "#442f07";
+            ctx.fillStyle = "#166e22";
             ctx.fill();
             ctx.closePath();
         }
