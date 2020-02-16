@@ -9,6 +9,10 @@ let sect = document.querySelector("section");
 let para = document.createElement('p');
 sect.appendChild(para);
 
+function random(bottom,top){
+    return bottom+Math.floor(Math.random()*(top-bottom));//不含top;
+}
+
 let oping = false;
 let fastFall = false;
 let lastOpTime = new Date();
@@ -71,10 +75,26 @@ Map.prototype.erase = function () {
 let display = []
 map = new Map();
 
+const blockMetaData = [//坐标第二列是旋转中心
+    ["O",[2,4],[2,5],[3,4],[3,5]],
+    ["I",[0,4],[1,4],[2,4],[3,4]],
+    ["J",[1,4],[2,4],[3,4],[3,3]],
+    ["L",[1,4],[2,4],[3,4],[3,5]],
+    ["Z",[1,4],[2,4],[2,5],[3,5]],
+    ["S",[1,5],[2,5],[2,4],[3,4]],
+    ["T",[2,4],[3,4],[3,3],[3,5]]
+]
+
 function Block() {
-    this.kind = "O"
+    let blockPos = random(0,7);
+    this.kind = blockMetaData[blockPos][0];
     this.spin = 1;//旋转了一次
-    this.occup = [[1, 4], [2, 4], [2, 5], [1, 5]]//行，列
+    this.occup = [
+        [blockMetaData[blockPos][1][0],blockMetaData[blockPos][1][1]],
+        [blockMetaData[blockPos][2][0],blockMetaData[blockPos][2][1]],
+        [blockMetaData[blockPos][3][0],blockMetaData[blockPos][3][1]],
+        [blockMetaData[blockPos][4][0],blockMetaData[blockPos][4][1]]
+    ];//行，列
     this.settled = false;
 };
 let blockNow = new Block();
@@ -93,9 +113,11 @@ Block.prototype.settleCheck = function () {
             map.record[blockNow.occup[i][0] * 10 + blockNow.occup[i][1]] = 1;
         }
         map.erase();
-        if(!fastFall) blockNow = new Block();//防止陷入死循环
+        if(!fastFall){
+            blockNow = new Block();
+            console.log(blockNow);
+        }//防止陷入死循环
     }
-
 }
 
 Block.prototype.fall = function () {
