@@ -31,7 +31,7 @@ function keyDown(e) {
         fastFall = true;//强行进入检查
         while (!blockNow.settled) {
             blockNow.fall();
-            console.log(blockNow.settled);
+            //console.log(blockNow.settled);
         }
         blockNow = new Block();
     }
@@ -50,27 +50,32 @@ function keyUp(e) {
 //document.addEventListener("keypress", Op, false);
 
 function Map() {
-    this.record = [];
-    for (let i = 0; i < 240; i++) {
-        this.record[i] = -1;
-    }
-    for(let i=240; i<250;i++){
-        this.record[i] = 1;
+    this.record = new Array;
+    //i行j列
+    for (let i = 0; i < 25; i++) {
+        this.record[i] = new Array;
+        for (let j = 0; j < 12; j++) {
+            if (i == 24) this.record[i][j] = 0;
+            else if (j == 0 || j == 11)
+                this.record[i][j] = 0;//边框
+            else this.record[i][j] = -1;//背景
+        }
     }
 }
 
 Map.prototype.erase = function () {
     let full = true;
     for (let i = 23; i >= 0; i--) {
-        for (let j = 0; j < 10; j++)
-            if (map.record[i * 10 + j] == -1) full = false;
+        for (let j = 1; j <= 10; j++)
+            if (map.record[i][j] == -1) full = false;
+        console.log(full);
         if (full) {//开始消除
-            for (let j = 0; j < 10; j++) {
-                map.record[i * 10 + j] = -1;
+            for (let j = 1; j <= 10; j++) {
+                map.record[i][j] = -1;
                 for (let ix = i; ix > 0; ix--) {
-                    let temp = map.record[ix * 10 + j];
-                    map.record[ix * 10 + j] = map.record[(ix - 1) * 10 + j];
-                    map.record[(ix - 1) * 10 + j] = temp;
+                    let temp = map.record[ix][j];
+                    map.record[ix][j] = map.record[(ix - 1)][j];
+                    map.record[(ix - 1)][j] = temp;
                 }
             }
             i++;
@@ -79,7 +84,7 @@ Map.prototype.erase = function () {
     }
 }
 
-let display = []
+let display = [];
 map = new Map();
 
 const blockMetaData = [//坐标第二列是旋转中心
@@ -108,21 +113,21 @@ let blockNow = new Block();
 
 Block.prototype.settleCheck = function () {
     checkTime = new Date();
-    //console.log(checkTime - lastOpTime);
     if (fastFall || (checkTime - lastOpTime >= 300 && oping == false)) {
         for (let i = 0; i < blockNow.occup.length && !blockNow.settled; i++) {
             //if (this.occup[i][0] >= 23) blockNow.settled = true;
-            if (map.record[(this.occup[i][0] + 1) * 10 + this.occup[i][1]] >= 1) blockNow.settled = true;
+            if (map.record[this.occup[i][0] + 1][this.occup[i][1]] >= 0) blockNow.settled = true;
         }
     }
     if (this.settled) {
         for (let i = 0; i < blockNow.occup.length; i++) {
-            map.record[blockNow.occup[i][0] * 10 + blockNow.occup[i][1]] = 1;
+            map.record[blockNow.occup[i][0]][blockNow.occup[i][1]] = 1;
         }
+        //console.log(blockNow);
+        //console.log(map.record);
         map.erase();
         if (!fastFall) {
             blockNow = new Block();
-            console.log(blockNow);
         }//防止陷入死循环
     }
 }
@@ -131,8 +136,7 @@ Block.prototype.fall = function () {
     //console.log(this.occup[1]);
     let opLegal = true;
     for (let i = 0; i < 4 && !blockNow.settled && opLegal; i++) {
-        //if (this.occup[i][0] >= 23) opLegal = false;
-        if (map.record[(this.occup[i][0] + 1) * 10 + this.occup[i][1]] >= 1) opLegal = false;
+        if (map.record[this.occup[i][0] + 1][this.occup[i][1]] >= 0) opLegal = false;
     }
     for (let i = 0; i < 4 && !blockNow.settled && opLegal; i++) {
         this.occup[i][0]++;
@@ -144,16 +148,16 @@ Block.prototype.prlmove = function (direction) {
     let opLegal = true;
     if (direction == "l") {
         for (let i = 0; i < blockNow.occup.length && !blockNow.settled; i++) {
-            if ((blockNow.occup[i][1] - 1) < 0) opLegal = false;
-            if (map.record[blockNow.occup[i][0] * 10 + (blockNow.occup[i][1] - 1)] > 0) opLegal = false;
+            // if ((blockNow.occup[i][1] - 1) < 0) opLegal = false;
+            if (map.record[blockNow.occup[i][0]][blockNow.occup[i][1] - 1] >= 0) opLegal = false;
         }
         for (let i = 0; i < blockNow.occup.length && !blockNow.settled && opLegal; i++)
             blockNow.occup[i][1]--;
     }
     else if (direction == "r") {
         for (let i = 0; i < blockNow.occup.length && !blockNow.settled; i++) {
-            if ((blockNow.occup[i][1] + 1) > 9) opLegal = false;
-            if (map.record[blockNow.occup[i][0] * 10 + (blockNow.occup[i][1] + 1)] > 0) opLegal = false;
+            //if ((blockNow.occup[i][1] + 1) > 9) opLegal = false;
+            if (map.record[blockNow.occup[i][0]][(blockNow.occup[i][1] + 1)] >= 0) opLegal = false;
         }
         for (let i = 0; i < blockNow.occup.length && !blockNow.settled && opLegal; i++)
             blockNow.occup[i][1]++;
@@ -161,10 +165,10 @@ Block.prototype.prlmove = function (direction) {
 }
 
 const spinTest3 = [
-    [[0,0],[-1,0],[-1,1],[0,-2],[-1,-2]],//0-R
-    [[0,0],[1,0],[1,-1],[0,2],[1,2]],//R-2
-    [[0,0],[1,0],[1,1],[0,-2],[1,-2]],//2-L
-    [[0,0],[-1,0],[-1,-1],[0,2],[-1,2]]//L-0
+    [[0, 0], [-1, 0], [-1, 1], [0, -2], [-1, -2]],//0-R
+    [[0, 0], [1, 0], [1, -1], [0, 2], [1, 2]],//R-2
+    [[0, 0], [1, 0], [1, 1], [0, -2], [1, -2]],//2-L
+    [[0, 0], [-1, 0], [-1, -1], [0, 2], [-1, 2]]//L-0
 ]
 
 Block.prototype.spin = function (direction) {
@@ -189,10 +193,11 @@ Block.prototype.spin = function (direction) {
 
 function mapForm() {
     for (let i = 0; i < 200; i++) {
-        display[i] = map.record[i+40];
+        display[i] = map.record[Math.floor((i + 40) / 10)][i % 10 + 1];
     }
     for (let i = 0; i < blockNow.occup.length; i++) {
-        display[(blockNow.occup[i][0] - 4) * 10 + blockNow.occup[i][1]] = 0;
+        if (blockNow.occup[i][0] >= 4)
+            display[(blockNow.occup[i][0] - 4) * 10 + blockNow.occup[i][1]-1] = 0;
     }
 }
 
