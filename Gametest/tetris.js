@@ -4,73 +4,106 @@ let canvas = document.getElementById("playground");
 canvas.height = 20 * UNIT_SIZE;
 canvas.width = 10 * UNIT_SIZE;
 let ctx = canvas.getContext("2d");
-//初始化地图
+//初始化地图与显示
 let display = [], map = [];
 for (let i = 0; i < 240; i++) {
-    map[i]= -1;
+    map[i] = -1;
 }
 for (let i = 0; i < 200; i++) {
     display[i] = -1;
 }
 
-
 let sect = document.querySelector("section");
 let para = document.createElement('p');
 sect.appendChild(para);
 
+//键盘监听
 //document.addEventListener("keydown",keyDown,false);
 //document.addEventListener("keyup",keyUp,false);
-// document.addEventListener("keypress",keyPress,false);
-// function keyPress(e){
-//     if(e.key == "a"||e.key =="A"){
-//         posX-=30;
-//     }
-//     if(e.key == "d"||e.key == "D"){
-//         posX+=30;
-//     }
-//     if(e.key == "w"||e.key =="W"){
-//         posY-=30;
-//     }
-//     if(e.key == "s"||e.key == "S"){
-//         posY+=30;
-//     }
-//     para.textContent = "KeyboardInput:  "+e.key;
-// }
+document.addEventListener("keypress", Op, false);
+let lastOpTime = new Date();
+function Op(e) {
+    lastOpTime = new Date();
+    if (e.key == "a" || e.key == "A")
+        blockNow.prlmove("l");
+    if (e.key == "d" || e.key == "D")
+        blockNow.prlmove("r");
+    // if(e.key == "w"||e.key =="W"){
+    //     posY-=30;
+    // }
+    if (e.key == "s" || e.key == "S")
+        blockNow.fall();
+    para.textContent = "KeyboardInputLog:  " + e.key;
+}
 
 function Block() {
     this.kind = "Z"
-    this.pos = 1;//旋转了一次
+    this.spin = 1;//旋转了一次
     this.occup = [[1, 4], [2, 4], [2, 5], [3, 5]]//行，列
+    this.settled = false;
 };
+let blockNow = new Block();
 
-Block.prototype.fall = function () {
-    let settled = false;
-    for (let i = 0; i < 4 && !settled; i++) {
-        if(this.occup[i][0] == 23) settled=true;
-    }
-    for (let i = 0; i < 4 && !settled; i++) {
-        this.occup[i][0]++;
-    }
+Block.form = function(){
+    this.kind = "Z"
+    this.spin = 1;//旋转了一次
+    this.occup = [[1, 4], [2, 4], [2, 5], [3, 5]]//行，列
+    this.settled = false;
 }
 
-let blockNow = new Block();
+Block.prototype.settleCheck = function () {
+    checkTime = new Date();
+    console.log(checkTime - lastOpTime);
+    if (checkTime - lastOpTime >= 300) {
+        for (let i = 0; i < 4 && !blockNow.settled; i++) {
+            if (this.occup[i][0] >= 23) blockNow.settled = true;
+        }
+    }
+    if(this.settled)
+        blockNow = new Block();
+}
+
+Block.prototype.fall = function () {
+    //console.log(this.occup);
+    let opLegal = true;
+    for (let i = 0; i < 4 && !blockNow.settled && opLegal; i++) {
+        if (this.occup[i][0] >= 23) opLegal = false;
+    }
+    for (let i = 0; i < 4 && !blockNow.settled && opLegal; i++) {
+        this.occup[i][0]++;
+    }
+    this.settleCheck();
+}
+
+Block.prototype.prlmove = function (direction) {
+    let opLegal = true;
+    if (direction == "l") {
+        for (let i = 0; i < 4 && !blockNow.settled; i++)
+            if ((blockNow.occup[i][1] - 1) < 0) opLegal = false;
+        for (let i = 0; i < 4 && !blockNow.settled && opLegal; i++)
+            blockNow.occup[i][1]--;
+    }
+    else if (direction == "r") {
+        for (let i = 0; i < 4 && !blockNow.settled; i++)
+            if ((blockNow.occup[i][1] + 1) > 9) opLegal = false;
+        for (let i = 0; i < 4 && !blockNow.settled && opLegal; i++)
+            blockNow.occup[i][1]++;
+    }
+}
 
 function mapForm() {
     for (let i = 0; i < 200; i++) {
         display[i] = -1;
     }
     for (let i = 0; i < blockNow.occup.length; i++) {
-        display[(blockNow.occup[i][0]-4) * 10 + blockNow.occup[i][1]] = 0;
-        //console.log((blockNow.occup[i][0]-4) * 10 + blockNow.occup[i][1]);
+        display[(blockNow.occup[i][0] - 4) * 10 + blockNow.occup[i][1]] = 0;
     }
-    console.log(display);
 }
 
 function draw() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);//刷新画布
-    blockNow.fall();
     mapForm();
-    for (let i = 0 ; i < display.length; i++) {
+    for (let i = 0; i < display.length; i++) {
         //console.log("hello");
         if (display[i] == 0) {
             ctx.beginPath();
@@ -80,7 +113,8 @@ function draw() {
             ctx.closePath();
         }
     }
+    window.requestAnimationFrame(draw);
 }
 
-mapForm();
-setInterval(draw, 500);
+setInterval("blockNow.fall()", 1000);
+draw();
