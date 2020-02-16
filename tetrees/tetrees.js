@@ -32,7 +32,6 @@ function keyDown(e) {
         fastFall = true;//强行进入检查
         while (!blockNow.settled) {
             blockNow.fall();
-            //console.log(blockNow.settled);
         }
         blockNow = new Block();
     }
@@ -71,7 +70,6 @@ Map.prototype.erase = function () {
     for (let i = 23; i >= 0; i--) {
         for (let j = 1; j <= 10; j++)
             if (map.record[i][j] == -1) full = false;
-        console.log(full);
         if (full) {//开始消除
             for (let j = 1; j <= 10; j++) {
                 map.record[i][j] = -1;
@@ -126,8 +124,6 @@ Block.prototype.settleCheck = function () {
         for (let i = 0; i < blockNow.occup.length; i++) {
             map.record[blockNow.occup[i][0]][blockNow.occup[i][1]] = 1;
         }
-        //console.log(blockNow);
-        //console.log(map.record);
         map.erase();
         if (!fastFall) {
             blockNow = new Block();
@@ -175,15 +171,15 @@ const xSpin3 = [
     8, 5, 2
 ];
 const spinTest3 = [
-    [[0, 0], [-1, 0], [-1, 1], [0, -2], [-1, -2]],//0-R
-    [[0, 0], [1, 0], [1, -1], [0, 2], [1, 2]],//R-2
-    [[0, 0], [1, 0], [1, 1], [0, -2], [1, -2]],//2-L
-    [[0, 0], [-1, 0], [-1, -1], [0, 2], [-1, 2]]//L-0
+    [[0, 0], [0, -1], [1, -1], [-2, 0], [-2, -1]],//0-R
+    [[0, 0], [0, 1], [-1, 1], [2, 0], [2, 1]],//R-2
+    [[0, 0], [0, 1], [1, 1], [-2, 0], [-2, 1]],//2-L
+    [[0, 0], [0, -1], [-1, -1], [2, 0], [2, -1]]//L-0
 ];
 Block.prototype.spinR = function () {
     let testTimes = 0;
     let opLegal = true;
-    let core = this.occup[1];//旋转中心记录
+    let core = [this.occup[1][0],this.occup[1][1]];//旋转中心记录
     switch (this.kind) {
         case "O":
             break;
@@ -191,31 +187,28 @@ Block.prototype.spinR = function () {
             break;
         default://3*3类方块
             let spined = this.spin(core);
-            console.log(this.occup);
-            console.log(spined);
-            for (let i = 0; i < 4; i++) {
-                // console.log(this.occup[i][0], spined[i][0]);
-                this.occup[i][0] = core[0] + spined[i][0];
-                this.occup[i][1] = core[1] + spined[i][1];
+            //console.log(this.occup);
+            //console.log(spined);
+            while (testTimes < 5) {
+                for (let i = 0; i < 4; i++) {
+                    if (map.record[core[0] + spined[i][0] + spinTest3[this.pos][testTimes][0]][core[1] + spined[i][1] + spinTest3[this.pos][testTimes][1]] >= 0)
+                        opLegal = false;
+                }
+                if (opLegal) {
+                    console.log(this.pos,testTimes);
+                    console.log(spinTest3[this.pos][testTimes]);
+                    for (let i = 0; i < 4; i++) {
+                        this.occup[i][0] = core[0] + spined[i][0] + spinTest3[this.pos][testTimes][0];
+                        this.occup[i][1] = core[1] + spined[i][1] + spinTest3[this.pos][testTimes][1];
+                        console.log(core);
+                        console.log(core[0] + spined[i][0] + spinTest3[this.pos][testTimes][0],core[1] + spined[i][1] + spinTest3[this.pos][testTimes][1]);
+                    }
+                    this.pos = (this.pos + 1) % 4;
+                    break;
+                }
+                testTimes++;
+                opLegal = true;
             }
-            console.log(this.occup);
-            // while (testTimes < 5) {
-            //     for (let i = 0; i < 4; i++) {
-            //         console.log(core[1]);
-            //         console.log(spined[i][1]);
-            //         if (map.record[core[0] + spined[i][0]][core[1] + spined[i][1]] >= 0)
-            //             opLegal = false;
-            //     }
-            //     if(opLegal){
-            //         for (let i = 0; i < 4; i++) {
-            //             blockNow.occup[i][0]+=spined[i][0];
-            //             blockNow.occup[i][1]+=spined[i][1];
-            //         }
-            //         break;
-            //     }
-            //     testTimes++;
-            //     opLegal = true;
-            // }
             break;
     }
 }
@@ -224,7 +217,6 @@ Block.prototype.spin = function (core) {
     let temp = [];
     for (let i = 0; i < this.occup.length; i++) {
         temp[i] = [this.occup[i][0] - core[0], this.occup[i][1] - core[1]];//读取相对坐标
-        console.log(temp[i]);
         if (temp[i][0] + temp[i][1] == 2 || temp[i][0] + temp[i][1] == -2) {//左上&右下角旋
             temp[i][1] = -temp[i][1];
         }
@@ -263,7 +255,6 @@ function draw() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);//刷新画布
     mapForm();
     for (let i = 0; i < display.length; i++) {
-        //console.log("hello");
         if (display[i] == 0) {
             ctx.beginPath();
             ctx.rect(UNIT_SIZE * (i % 10), UNIT_SIZE * Math.floor(i / 10), UNIT_SIZE, UNIT_SIZE);
