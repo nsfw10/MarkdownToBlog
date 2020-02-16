@@ -37,30 +37,27 @@ function Op(e) {
 }
 
 function Block() {
-    this.kind = "Z"
+    this.kind = "O"
     this.spin = 1;//旋转了一次
-    this.occup = [[1, 4], [2, 4], [2, 5], [3, 5]]//行，列
+    this.occup = [[1, 4], [2, 4], [2, 5], [1, 5]]//行，列
     this.settled = false;
 };
 let blockNow = new Block();
-
-Block.form = function(){
-    this.kind = "Z"
-    this.spin = 1;//旋转了一次
-    this.occup = [[1, 4], [2, 4], [2, 5], [3, 5]]//行，列
-    this.settled = false;
-}
 
 Block.prototype.settleCheck = function () {
     checkTime = new Date();
     console.log(checkTime - lastOpTime);
     if (checkTime - lastOpTime >= 300) {
-        for (let i = 0; i < 4 && !blockNow.settled; i++) {
+        for (let i = 0; i < blockNow.occup.length && !blockNow.settled; i++) {
             if (this.occup[i][0] >= 23) blockNow.settled = true;
         }
     }
-    if(this.settled)
+    if(this.settled){
+        for (let i = 0; i < blockNow.occup.length; i++) {
+            map[blockNow.occup[i][0] * 10 + blockNow.occup[i][1]] = 1;
+        }
         blockNow = new Block();
+    }
 }
 
 Block.prototype.fall = function () {
@@ -78,22 +75,22 @@ Block.prototype.fall = function () {
 Block.prototype.prlmove = function (direction) {
     let opLegal = true;
     if (direction == "l") {
-        for (let i = 0; i < 4 && !blockNow.settled; i++)
+        for (let i = 0; i < blockNow.occup.length && !blockNow.settled; i++)
             if ((blockNow.occup[i][1] - 1) < 0) opLegal = false;
-        for (let i = 0; i < 4 && !blockNow.settled && opLegal; i++)
+        for (let i = 0; i < blockNow.occup.length && !blockNow.settled && opLegal; i++)
             blockNow.occup[i][1]--;
     }
     else if (direction == "r") {
-        for (let i = 0; i < 4 && !blockNow.settled; i++)
+        for (let i = 0; i < blockNow.occup.length && !blockNow.settled; i++)
             if ((blockNow.occup[i][1] + 1) > 9) opLegal = false;
-        for (let i = 0; i < 4 && !blockNow.settled && opLegal; i++)
+        for (let i = 0; i < blockNow.occup.length && !blockNow.settled && opLegal; i++)
             blockNow.occup[i][1]++;
     }
 }
 
 function mapForm() {
-    for (let i = 0; i < 200; i++) {
-        display[i] = -1;
+    for (let i = 40; i < map.length; i++) {
+        display[i-40]=map[i];
     }
     for (let i = 0; i < blockNow.occup.length; i++) {
         display[(blockNow.occup[i][0] - 4) * 10 + blockNow.occup[i][1]] = 0;
@@ -109,6 +106,13 @@ function draw() {
             ctx.beginPath();
             ctx.rect(UNIT_SIZE * (i % 10), UNIT_SIZE * Math.floor(i / 10), UNIT_SIZE, UNIT_SIZE);
             ctx.fillStyle = "#228b22";
+            ctx.fill();
+            ctx.closePath();
+        }
+        else if(display[i] == 1){
+            ctx.beginPath();
+            ctx.rect(UNIT_SIZE * (i % 10), UNIT_SIZE * Math.floor(i / 10), UNIT_SIZE, UNIT_SIZE);
+            ctx.fillStyle = "#442f07";
             ctx.fill();
             ctx.closePath();
         }
