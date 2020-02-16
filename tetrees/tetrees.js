@@ -176,32 +176,31 @@ const spinTest3 = [
     [[0, 0], [0, 1], [1, 1], [-2, 0], [-2, 1]],//2-L
     [[0, 0], [0, -1], [-1, -1], [2, 0], [2, -1]]//L-0
 ];
+
 Block.prototype.spinR = function () {
     let testTimes = 0;
     let opLegal = true;
     let core = [this.occup[1][0],this.occup[1][1]];//旋转中心记录
+    let temp = [];
+    for (let i = 0; i < this.occup.length; i++) {
+        temp[i] = [this.occup[i][0] - core[0], this.occup[i][1] - core[1]];//读取相对坐标
+    }
     switch (this.kind) {
         case "O":
             break;
         case "I":
             break;
         default://3*3类方块
-            let spined = this.spin(core);
-            //console.log(this.occup);
-            //console.log(spined);
+            let spined = this.spin(temp);
             while (testTimes < 5) {
                 for (let i = 0; i < 4; i++) {
                     if (map.record[core[0] + spined[i][0] + spinTest3[this.pos][testTimes][0]][core[1] + spined[i][1] + spinTest3[this.pos][testTimes][1]] >= 0)
                         opLegal = false;
                 }
                 if (opLegal) {
-                    console.log(this.pos,testTimes);
-                    console.log(spinTest3[this.pos][testTimes]);
                     for (let i = 0; i < 4; i++) {
                         this.occup[i][0] = core[0] + spined[i][0] + spinTest3[this.pos][testTimes][0];
                         this.occup[i][1] = core[1] + spined[i][1] + spinTest3[this.pos][testTimes][1];
-                        console.log(core);
-                        console.log(core[0] + spined[i][0] + spinTest3[this.pos][testTimes][0],core[1] + spined[i][1] + spinTest3[this.pos][testTimes][1]);
                     }
                     this.pos = (this.pos + 1) % 4;
                     break;
@@ -213,28 +212,64 @@ Block.prototype.spinR = function () {
     }
 }
 
-Block.prototype.spin = function (core) {
+Block.prototype.spinL = function () {
+    let testTimes = 0;
+    let opLegal = true;
+    let core = [this.occup[1][0],this.occup[1][1]];//旋转中心记录
     let temp = [];
     for (let i = 0; i < this.occup.length; i++) {
         temp[i] = [this.occup[i][0] - core[0], this.occup[i][1] - core[1]];//读取相对坐标
-        if (temp[i][0] + temp[i][1] == 2 || temp[i][0] + temp[i][1] == -2) {//左上&右下角旋
-            temp[i][1] = -temp[i][1];
-        }
-        else if (temp[i][0] + temp[i][1] == 0) {//右上&左下角旋
-            temp[i][0] = -temp[i][0];
-        }
-        else {//边的打表旋转
-            if (temp[i][0] == -1 && temp[i][1] == 0) {
-                temp[i][0] = 0; temp[i][1] = 1;
+    }
+    switch (this.kind) {
+        case "O":
+            break;
+        case "I":
+            break;
+        default://3*3类方块
+            let spined = this.spin(temp,3);
+            console.log(spined);
+            while (testTimes < 5) {
+                for (let i = 0; i < 4; i++) {
+                    if (map.record[core[0] + spined[i][0] - spinTest3[this.pos][testTimes][0]][core[1] + spined[i][1] - spinTest3[this.pos][testTimes][1]] >= 0)
+                        opLegal = false;
+                }
+                if (opLegal) {
+                    for (let i = 0; i < 4; i++) {
+                        this.occup[i][0] = core[0] + spined[i][0] - spinTest3[this.pos][testTimes][0];
+                        this.occup[i][1] = core[1] + spined[i][1] - spinTest3[this.pos][testTimes][1];
+                    }
+                    this.pos = (this.pos + 1) % 4;
+                    break;
+                }
+                testTimes++;
+                opLegal = true;
             }
-            else if (temp[i][0] == 0 && temp[i][1] == 1) {
-                temp[i][0] = 1; temp[i][1] = 0;
+            break;
+    }
+}
+
+Block.prototype.spin = function (temp,repeat = 1) {
+    for(repeat;repeat>0;repeat--){
+        for (let i = 0; i < this.occup.length; i++) {
+            if (temp[i][0] + temp[i][1] == 2 || temp[i][0] + temp[i][1] == -2) {//左上&右下角旋
+                temp[i][1] = -temp[i][1];
             }
-            else if (temp[i][0] == 1 && temp[i][1] == 0) {
-                temp[i][0] = 0; temp[i][1] = -1;
+            else if (temp[i][0] + temp[i][1] == 0) {//右上&左下角旋
+                temp[i][0] = -temp[i][0];
             }
-            else if (temp[i][0] == 0 && temp[i][1] == -1) {
-                temp[i][0] = -1; temp[i][1] = 0;
+            else {//边的打表旋转
+                if (temp[i][0] == -1 && temp[i][1] == 0) {
+                    temp[i][0] = 0; temp[i][1] = 1;
+                }
+                else if (temp[i][0] == 0 && temp[i][1] == 1) {
+                    temp[i][0] = 1; temp[i][1] = 0;
+                }
+                else if (temp[i][0] == 1 && temp[i][1] == 0) {
+                    temp[i][0] = 0; temp[i][1] = -1;
+                }
+                else if (temp[i][0] == 0 && temp[i][1] == -1) {
+                    temp[i][0] = -1; temp[i][1] = 0;
+                }
             }
         }
     }
