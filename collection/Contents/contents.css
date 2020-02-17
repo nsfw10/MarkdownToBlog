@@ -37,7 +37,6 @@
 #info #author{
     float: left;
     font-size: 20px;
-    /* font-family: 思源宋体，宋体; 默认是思源宋体*/
     font-weight: 600;
     line-height: 24px;
     color: /* #acb3aa */#bdb88e;
@@ -67,7 +66,7 @@
 
 #article p {
     font-size: 18px;
-    font-family: 思源黑体，黑体;
+    font-family: 思源黑体;
     font-weight: 300;
     line-height: 26px;
     text-align: justify;

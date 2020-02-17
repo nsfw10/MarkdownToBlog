@@ -23,7 +23,7 @@ img {
 }
 
 html body {
-  font-family: 思源宋体, 思源黑体, 微软雅黑, 宋体, Arial;
+  font-family: 思源宋体, 思源黑体;
   overflow-x: hidden;
   width: 100%;
 }
@@ -52,6 +52,31 @@ html body {
   margin: 0 auto;
 }
 
+
+@font-face{
+  font-family: 思源黑体;
+  src:url(/font/SourceHanSans-Light.ttc);
+  font-weight: 300;
+}
+
+@font-face{
+  font-family: 思源宋体;
+  src:url(/font/SourceHanSerifSC-Regular.otf);
+  font-weight: 400;
+}
+
+@font-face{
+  font-family: 思源宋体;
+  src: url(/font/SourceHanSerifSC-SemiBold.otf);
+  font-weight: 600;
+}
+
+@font-face{
+  font-family: 思源宋体;
+  src:url(/font/SourceHanSerifSC-Heavy.otf);
+  font-weight: 900;
+}
+
 #head {
   position: sticky;
   top: 0px;
@@ -74,7 +99,7 @@ html body {
 #logo h1 {
   /* line-height: 70px; */
   font-size: 40px;
-  font-family: 思源宋体, 宋体;
+  font-family: 思源宋体;
   color: #aabcb2;
   font-weight: 900;
 }
@@ -90,8 +115,8 @@ html body {
   color: #eff2f0;
   font-size: 16px;
   line-height: 22px;
-  font-weight: 200;
   font-family: 思源黑体;
+  font-weight: 300;
   margin: 0;
 }
 
@@ -105,7 +130,7 @@ html body {
   line-height: 18px;
   padding: 0 21px;
   border-left: 1px solid #6a7c6e;
-  font-family: 思源黑体，微软雅黑, 黑体;
+  font-family: 思源黑体;
 }
 
 #head ul:last-child {
@@ -132,7 +157,6 @@ html body {
 #foot p {
   color: #d6e0da;
   font-size: 10px;
-  font-weight: 200;
   margin: 5px auto 10px auto;
 }
 
@@ -152,7 +176,7 @@ html body {
 /* #links a{
   color: #eff2f0;
   font-size: 14px;
-  font-weight: 200;
+  font-weight: 300;
   margin: 0 auto 0 auto;
 } */
 
@@ -169,7 +193,6 @@ html body {
   float: left;
   font-size: 12px;
   line-height: 14px;
-  font-weight: 200;
   box-sizing: border-box;
   width: 33.3%;
   height: 100%;
