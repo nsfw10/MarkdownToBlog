@@ -109,10 +109,15 @@ function Block() {
     ];//行，列
     this.core;
     if (this.kind == "O") this.core = [0, 0];
-    else if (this.kind == "I") this.core = [2.5, 5.5];
+    else if (this.kind == "I") this.core = [3.5, 5.5];
     else this.core = [blockMetaData[blockPos][2][0], blockMetaData[blockPos][2][1]];
 
     this.settled = false;
+
+    let spined = [];
+    for (let i = 0; i < this.occup.length; i++) {
+        spined[i] = [this.occup[i][0] - this.core[0], this.occup[i][1] - this.core[1]];//读取相对坐标
+    }
     console.log(this.kind);
     console.log(this.core);
 };
@@ -223,15 +228,15 @@ Block.prototype.spin3 = function (temp, repeat = 1) {
 }
 
 Block.prototype.spin4 = function (spined, repeat = 1) {
-    //console.log(spined[0][0], spined[0][1], spined[1][0], spined[1][1], spined[2][0], spined[2][1], spined[3][0], spined[3][1]);
+    console.log(spined[0][0], spined[0][1], "||",spined[1][0], spined[1][1], "||",spined[2][0], spined[2][1], "||",spined[3][0], spined[3][1]);
     for (repeat; repeat > 0; repeat--) {
-        let temp = [spined[2][0], spined[2][1]];
-        spined[2][0] = spined[1][0];
-        spined[2][1] = spined[1][1];
-        spined[1][0] = -temp[0];
-        spined[1][1] = -temp[1];
-        const trace0 = [0.5, -1.5, -0.5, 1.5];
-        const trace3 = [-1.5, 0.5, 1.5, -0.5];
+        let temp = [spined[1][0], spined[1][1]];
+        spined[1][0] = spined[2][0];
+        spined[1][1] = spined[2][1];
+        spined[2][0] = -temp[0];
+        spined[2][1] = -temp[1];
+        const trace0 = [-1.5, 0.5, 1.5, -0.5];
+        const trace3 = [0.5, -1.5, -0.5, 1.5];
         for (let i = 0; i < 4; i++) {
             if (spined[0][0] == trace0[i]) {
                 spined[0][0] = trace0[(i + 1) % 4];
@@ -257,7 +262,7 @@ Block.prototype.spin4 = function (spined, repeat = 1) {
             }
         }
     }
-    //console.log(spined[0][0], spined[0][1], spined[1][0], spined[1][1], spined[2][0], spined[2][1], spined[3][0], spined[3][1]);
+    console.log(spined[0][0], spined[0][1], "||",spined[1][0], spined[1][1], "||",spined[2][0], spined[2][1], "||",spined[3][0], spined[3][1]);
 }
 
 //踢墙旋转
