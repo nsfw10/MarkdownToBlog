@@ -150,7 +150,6 @@ Block.prototype.fall = function () {
     if (!blockNow.settled && opLegal) {
         this.core[0]++;
     }
-    console.log(this.core);
     this.settleCheck();
 }
 //方块平移
@@ -221,7 +220,7 @@ Block.prototype.spin3 = function (temp, repeat = 1) {
 }
 
 Block.prototype.spin4 = function (spined, repeat = 1) {
-    console.log(spined);
+    console.log(spined[0][0], spined[0][1], spined[1][0], spined[1][1], spined[2][0], spined[2][1], spined[3][0], spined[3][1]);
     for (repeat; repeat > 0; repeat--) {
         let temp = [spined[2][0], spined[2][1]];
         spined[2][0] = spined[1][0];
@@ -231,19 +230,31 @@ Block.prototype.spin4 = function (spined, repeat = 1) {
         const trace0 = [0.5, -1.5, -0.5, 1.5];
         const trace3 = [-1.5, 0.5, 1.5, -0.5];
         for (let i = 0; i < 4; i++) {
-            if (spined[0][0] == trace0[i]) spined[0][0] = trace0[(i + 1) % 4];
+            if (spined[0][0] == trace0[i]) {
+                spined[0][0] = trace0[(i + 1) % 4];
+                break;
+            }
         }
         for (let i = 0; i < 4; i++) {
-            if (spined[0][1] == trace0[i]) spined[0][1] = trace0[(i + 1) % 4];
+            if (spined[0][1] == trace0[i]) {
+                spined[0][1] = trace0[(i + 1) % 4];
+                break;
+            }
         }
         for (let i = 0; i < 4; i++) {
-            if (spined[3][0] == trace3[i]) spined[3][0] = trace3[(i + 1) % 4];
+            if (spined[3][0] == trace3[i]) {
+                spined[3][0] = trace3[(i + 1) % 4];
+                break;
+            }
         }
         for (let i = 0; i < 4; i++) {
-            if (spined[3][0] == trace3[i]) spined[3][0] = trace3[(i + 1) % 4];
+            if (spined[3][1] == trace3[i]) {
+                spined[3][1] = trace3[(i + 1) % 4];
+                break;
+            }
         }
     }
-    console.log(spined);
+    console.log(spined[0][0], spined[0][1], spined[1][0], spined[1][1], spined[2][0], spined[2][1], spined[3][0], spined[3][1]);
 }
 
 //踢墙旋转
@@ -254,7 +265,6 @@ Block.prototype.spinR = function () {
     for (let i = 0; i < this.occup.length; i++) {
         spined[i] = [this.occup[i][0] - this.core[0], this.occup[i][1] - this.core[1]];//读取相对坐标
     }
-    //console.log(spined[0],spined[1],spined[2],spined[3]);
     switch (this.kind) {
         case "O":
             break;
@@ -263,7 +273,6 @@ Block.prototype.spinR = function () {
             break;
         default://3*3类方块
             this.spin3(spined);
-            //console.log(spined[0], spined[1], spined[2], spined[3]);
             while (testTimes < 5) {
                 for (let i = 0; i < 4; i++) {
                     if (map.record[this.core[0] + spined[i][0] + spinTest3[this.pos][testTimes][0]][this.core[1] + spined[i][1] + spinTest3[this.pos][testTimes][1]] >= 0)
