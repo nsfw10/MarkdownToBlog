@@ -23,7 +23,8 @@
 }
 
 #column {
-  background: url("img/columnBG.png") center bottom;
+  background: url("https://s2.ax1x.com/2020/02/17/3PlakR.png") center bottom;
+  /* background: url("img/columnBG") center bottom; */
   min-height: 424px;
   overflow: hidden;
   position: relative;
