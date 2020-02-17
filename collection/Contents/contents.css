@@ -1,0 +1,32 @@
+h2 {
+    font-size: 44px;
+    line-height: 44px;
+    color: #e7e3bd;
+    padding: 20px 0 30px 20px;
+    margin: 0 20px 0 20px;
+    border-top: 3px #e7e3bd solid;
+    border-bottom: 2px #e7e3bd dashed;
+}
+
+#article {
+    width: 90%;
+}
+
+#article h3 {
+    font-size: 34px;
+    line-height: 34px;
+    color: #cac7ac;
+    padding: 20px 0 20px 35px; 
+    border-bottom: 1px #e7e3bd dashed;
+    border-top: 1.5px #e7e3bd solid;
+    margin: 65px auto 0 auto;
+}
+
+#article p {
+    font-size: 18px;
+    font-family: 思源黑体，黑体;
+    font-weight: 300;
+    line-height: 26px;
+    color: #ecf3e0;
+    margin: 24px auto;
+}

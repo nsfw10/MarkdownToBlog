@@ -1,4 +1,23 @@
-#body{
+#column {
     background: url(https://s2.ax1x.com/2020/02/17/3P8rcV.png);
     min-height: 800px;
+    overflow: hidden;
+}
+
+#columnBox {
+    overflow: hidden;
+    background-color: #0d1113d2;
+    margin: 40px auto;
+    width: 90%;
+    max-width: 1000px;
+}
+h2 {
+    font-size: 44px;
+    line-height: 44px;
+    color: #e5e3ce;
+}
+
+#columnLog{
+    height: 100%;
+    background-color: white;
 }
