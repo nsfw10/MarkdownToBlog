@@ -3,13 +3,12 @@
     min-height: 800px;
     overflow: hidden;
 }
-
 #columnBox {
     overflow: hidden;
     background-color: #0d1113d2;
-    margin: 40px auto;
+    margin: 30px auto;
     width: 90%;
-    max-width: 1000px;
+    max-width: 900px;
 }
 h2 {
     font-size: 44px;
