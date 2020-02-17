@@ -179,18 +179,21 @@ Block.prototype.prlmove = function (direction) {
     }
 }
 
-//方块旋转
-const xSpin3 = [
-    6, 3, 0,
-    7, 4, 1,
-    8, 5, 2
-];
+//SRS表
 const spinTest3 = [
     [[0, 0], [0, -1], [1, -1], [-2, 0], [-2, -1]],//0-R
     [[0, 0], [0, 1], [-1, 1], [2, 0], [2, 1]],//R-2
     [[0, 0], [0, 1], [1, 1], [-2, 0], [-2, 1]],//2-L
     [[0, 0], [0, -1], [-1, -1], [2, 0], [2, -1]]//L-0
 ];
+const spinTest4 = [
+    [[0, 0], [0, -2], [0, 1], [-1, -2], [2, 1]],
+    [[0, 0], [0, -1], [0, 2], [2, -1], [-1, 2]],
+    [[0, 0], [0, 2], [0, -1], [1, 2], [-2, -1]],
+    [[0, 0], [0, 1], [0, -2], [-2, 1], [1, -2]],
+];
+const spinTest = [spinTest3,spinTest4];
+
 //不变中心旋转
 Block.prototype.spin3 = function (temp, repeat = 1) {
     for (repeat; repeat > 0; repeat--) {
@@ -220,7 +223,7 @@ Block.prototype.spin3 = function (temp, repeat = 1) {
 }
 
 Block.prototype.spin4 = function (spined, repeat = 1) {
-    console.log(spined[0][0], spined[0][1], spined[1][0], spined[1][1], spined[2][0], spined[2][1], spined[3][0], spined[3][1]);
+    //console.log(spined[0][0], spined[0][1], spined[1][0], spined[1][1], spined[2][0], spined[2][1], spined[3][0], spined[3][1]);
     for (repeat; repeat > 0; repeat--) {
         let temp = [spined[2][0], spined[2][1]];
         spined[2][0] = spined[1][0];
@@ -254,7 +257,7 @@ Block.prototype.spin4 = function (spined, repeat = 1) {
             }
         }
     }
-    console.log(spined[0][0], spined[0][1], spined[1][0], spined[1][1], spined[2][0], spined[2][1], spined[3][0], spined[3][1]);
+    //console.log(spined[0][0], spined[0][1], spined[1][0], spined[1][1], spined[2][0], spined[2][1], spined[3][0], spined[3][1]);
 }
 
 //踢墙旋转
@@ -262,6 +265,7 @@ Block.prototype.spinR = function () {
     let testTimes = 0;
     let opLegal = true;
     let spined = [];
+    let type;
     for (let i = 0; i < this.occup.length; i++) {
         spined[i] = [this.occup[i][0] - this.core[0], this.occup[i][1] - this.core[1]];//读取相对坐标
     }
@@ -270,29 +274,31 @@ Block.prototype.spinR = function () {
             break;
         case "I":
             this.spin4(spined);
+            type = 1;
             break;
         default://3*3类方块
             this.spin3(spined);
-            while (testTimes < 5) {
-                for (let i = 0; i < 4; i++) {
-                    if (map.record[this.core[0] + spined[i][0] + spinTest3[this.pos][testTimes][0]][this.core[1] + spined[i][1] + spinTest3[this.pos][testTimes][1]] >= 0)
-                        opLegal = false;
-                    //console.log(spined[0], spined[1], spined[2], spined[3]);
-                }
-                if (opLegal) {
-                    this.core[0] += spinTest3[this.pos][testTimes][0];
-                    this.core[1] += spinTest3[this.pos][testTimes][1];
-                    for (let i = 0; i < 4; i++) {
-                        this.occup[i][0] = this.core[0] + spined[i][0];
-                        this.occup[i][1] = this.core[1] + spined[i][1];
-                    }
-                    this.pos = (this.pos + 1) % 4;
-                    break;
-                }
-                testTimes++;
-                opLegal = true;
-            }
+            type = 0;
             break;
+    }
+    while (testTimes < 5) {
+        for (let i = 0; i < 4; i++) {
+            if (map.record[this.core[0] + spined[i][0] + spinTest[type][this.pos][testTimes][0]][this.core[1] + spined[i][1] + spinTest[type][this.pos][testTimes][1]] >= 0)
+                opLegal = false;
+            //console.log(spined[0], spined[1], spined[2], spined[3]);
+        }
+        if (opLegal) {
+            this.core[0] += spinTest[type][this.pos][testTimes][0];
+            this.core[1] += spinTest[type][this.pos][testTimes][1];
+            for (let i = 0; i < 4; i++) {
+                this.occup[i][0] = this.core[0] + spined[i][0];
+                this.occup[i][1] = this.core[1] + spined[i][1];
+            }
+            this.pos = (this.pos + 1) % 4;
+            break;
+        }
+        testTimes++;
+        opLegal = true;
     }
 }
 
@@ -300,6 +306,7 @@ Block.prototype.spinL = function () {
     let testTimes = 0;
     let opLegal = true;
     let spined = [];
+    let type;
     for (let i = 0; i < this.occup.length; i++) {
         spined[i] = [this.occup[i][0] - this.core[0], this.occup[i][1] - this.core[1]];//读取相对坐标
     }
@@ -307,28 +314,31 @@ Block.prototype.spinL = function () {
         case "O":
             break;
         case "I":
+            this.spin4(spined, 3);
+            type = 1;
             break;
         default://3*3类方块
             this.spin3(spined, 3);
-            while (testTimes < 5) {
-                for (let i = 0; i < 4; i++) {
-                    if (map.record[this.core[0] + spined[i][0] - spinTest3[this.pos][testTimes][0]][this.core[1] + spined[i][1] - spinTest3[this.pos][testTimes][1]] >= 0)
-                        opLegal = false;
-                }
-                if (opLegal) {
-                    this.core[0] -= spinTest3[this.pos][testTimes][0];
-                    this.core[1] -= spinTest3[this.pos][testTimes][1];
-                    for (let i = 0; i < 4; i++) {
-                        this.occup[i][0] = this.core[0] + spined[i][0];
-                        this.occup[i][1] = this.core[1] + spined[i][1];
-                    }
-                    this.pos = (this.pos + 1) % 4;
-                    break;
-                }
-                testTimes++;
-                opLegal = true;
-            }
+            type = 0;
             break;
+    }
+    while (testTimes < 5) {
+        for (let i = 0; i < 4; i++) {
+            if (map.record[this.core[0] + spined[i][0] - spinTest[type][this.pos][testTimes][0]][this.core[1] + spined[i][1] - spinTest[type][this.pos][testTimes][1]] >= 0)
+                opLegal = false;
+        }
+        if (opLegal) {
+            this.core[0] -= spinTest[type][this.pos][testTimes][0];
+            this.core[1] -= spinTest[type][this.pos][testTimes][1];
+            for (let i = 0; i < 4; i++) {
+                this.occup[i][0] = this.core[0] + spined[i][0];
+                this.occup[i][1] = this.core[1] + spined[i][1];
+            }
+            this.pos = (this.pos + 1) % 4;
+            break;
+        }
+        testTimes++;
+        opLegal = true;
     }
 }
 
