@@ -14,14 +14,18 @@ a {
   color: #6a7c6e;
 }
 
+a:hover {
+  color: #c9dfd3;
+}
+
 img {
   display: block;
 }
 
 html body {
   font-family: 思源宋体, 思源黑体, 微软雅黑, 宋体, Arial;
-  overflow-x:hidden;
-  width:100%;
+  overflow-x: hidden;
+  width: 100%;
 }
 
 /* 开始操作 */
@@ -70,7 +74,7 @@ html body {
 #logo h1 {
   /* line-height: 70px; */
   font-size: 40px;
-  font-family: 思源宋体,宋体;
+  font-family: 思源宋体, 宋体;
   color: #aabcb2;
   font-weight: 900;
 }
@@ -111,10 +115,6 @@ html body {
   color: #6a7c6e;
 }
 
-#head ul li a:hover {
-  color: #c9dfd3;
-}
-
 #foot {
   z-index: 10;
   background-color: #3b423b;
@@ -127,9 +127,49 @@ html body {
   text-align: center;
   overflow: hidden;
 }
-#foot p{
-  color: #eff2f0;
+
+#foot p {
+  color: #d6e0da;
   font-size: 10px;
   font-weight: 200;
-  margin: 10px auto 0 auto;
+  margin: 5px auto 10px auto;
+}
+
+#links {
+  width: 50%;
+  margin: 0 auto;
+}
+
+#links h2 {
+  font-size: 16px;
+  color: #e5e3ce;
+}
+
+/* #links a{
+  color: #eff2f0;
+  font-size: 14px;
+  font-weight: 200;
+  margin: 0 auto 0 auto;
+} */
+
+#links ul {
+  width: 60%;
+  min-width: 240px;
+  margin: 5px auto 2px auto;
+}
+
+#links ul li {
+  float: left;
+  font-size: 12px;
+  line-height: 14px;
+  font-weight: 200;
+  box-sizing: border-box;
+  width: 50%;
+  margin: 0 28px 0 28px;
+  border-left: #6a7c6e solid 1px;
+  margin: 0 auto;
+}
+
+#links ul li:last-of-type {
+  border-right:  #6a7c6e solid 1px;
 }
