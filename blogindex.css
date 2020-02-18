@@ -13,6 +13,7 @@
   height: 650px;
   position: relative;
   overflow: hidden;
+  background-color: #353c35;
 }
 #window img {
   position: absolute;
