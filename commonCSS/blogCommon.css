@@ -129,7 +129,7 @@ html body {
   margin: 0 auto;
 }
 
-#head {
+#header {
   position: sticky;
   top: 0px;
   /* position: fixed; */
@@ -166,21 +166,21 @@ html body {
   margin: 0;
 }
 
-#head ul {
+#header ul {
   float: right;
   margin: 20px 40px 25px 0px;
 }
-#head ul li {
+#header ul li {
   float: left;
   line-height: 18px;
   padding: 0 21px;
   border-left: 1px solid #6a7c6e;
   font-family: 思源黑体;
 }
-#head ul:last-child {
+#header ul:last-child {
   border-right: 1px solid #6a7c6e;
 }
-#head ul li a {
+#header ul li a {
   color: #6a7c6e;
 }
 
