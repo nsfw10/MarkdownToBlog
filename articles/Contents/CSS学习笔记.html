@@ -11,7 +11,9 @@
     <link rel="bookmark" href="https://s2.ax1x.com/2020/02/17/3P0GPU.png" type="image/x-icon" />
     <!-- CSS -->
     <link rel="stylesheet" href="/commonCSS/blogCommon.css">
-    <link rel="stylesheet" href="/commonCSS/navPages.css">
+    <link rel="stylesheet" href="/commonCSS/article.css">
+    
+    <script src="https://cdn.jsdelivr.net/npm/showdown@1.9.0/dist/showdown.min.js"></script>
 </head>
 
 <body>
@@ -30,25 +32,8 @@
     </div>
 
     <div id="desktop" class="containerFluid">
-        <div id="columnBox" class="container">
-            <h2>文章</h2>
-            <ul id="columns">
-                <li>
-                    <a href="Contents/CSS学习笔记.html">
-                        <h3>CSS学习笔记</h3>
-                    </a>
-                    <div id="info" class="clear">
-                        <ul id="labels" class="clear">
-                          <li>CSS</li>
-                          <li>笔记</li>
-                        </ul>
-                        <p id="author">文：社蕙</p>
-                        <p id="timeInclude">收录于：2020/2/18</p>
-                    </div>
-                    <p id="introduction">基础CSS和CSS3的学习笔记，持续更新。</p>
-                </li>
-            </ul>
-            </ul>
+        <div id="paper" class="container">
+            <div id="article"></div>
         </div>
     </div>
 
@@ -69,6 +54,38 @@
         </div>
         <p>由社蕙设计 Copyright © 2020 Non-sense 图片素材均取自@NoriZC</p>
     </div>
+
+    <!-- <script>
+        var converter = new showdown.Converter(),
+            text = "### CSS 文字样式\n字体类型：`font-family`\n- 英文字体\n- 中文字体（中英文一般都会被改变）\n- 衬线字体与非衬线体：有无棱角\n- 字体名字中出现空格则必须加单引号",
+        html = converter.makeHtml(text);
+        document.getElementById("article").innerHTML = html;
+    </script> -->
+
+    <script>
+        let text;
+        showdown.setOption("headerLevelStart",2);
+        function readMD() {
+            var xhr = new XMLHttpRequest();
+            xhr.open("get", "CSSNoteClass.md", true);
+            xhr.send();
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState == 4 && xhr.status == 200) {
+                    console.log(xhr);
+                    //console.log(xhr.responseText);
+                    text = xhr.responseText;
+                    // console.log(typeof text);
+                    var converter = new showdown.Converter();
+                    html = converter.makeHtml(text);
+                    document.getElementById("article").innerHTML = html;
+                    // return xhr.responseText;
+                } else if (xhr.status == 404) {
+                    console.log(xhr.status);
+                }
+            };
+        }
+        readMD();
+    </script>
 </body>
 
 </html>

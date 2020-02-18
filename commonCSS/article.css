@@ -12,11 +12,9 @@
     max-width: 900px;
 }
 
-#titleFirst {
-    background: url(/img/dots2L.png) 20px 32px no-repeat;
+h2 {
+    background: url(/img/dots2L.png) 5px 32px no-repeat;
     background-size: auto 30px;
-}
-#titleFirst h2 {
     font-size: 44px;
     line-height: 44px;
     color: #e7e3bd;
@@ -62,13 +60,12 @@
 }
 
 #article {
+    overflow: hidden;
     width: 90%;
 }
-#article .titles {
+#article h3 {
     background: url(/img/dots1L.png) 10px no-repeat;
     background-size: auto 26px;
-}
-#article h3 {
     font-size: 34px;
     line-height: 34px;
     color: #cac7ac;
