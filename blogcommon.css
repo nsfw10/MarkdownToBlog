@@ -1,83 +1,78 @@
 /* 引入字体 */
-
 /* noto-sans-sc-300 - chinese-simplified_latin */
-
 @font-face {
   font-family: "思源黑体";
   font-style: normal;
   font-weight: 300;
-  src: local("Noto Sans SC Light"), local("NotoSansSC-Light"),
+  src: local("思源黑体 Light"), local("SourceHanSans-Light"), local("Source Han Sans Light") ,local("Noto Sans SC Light"), local("NotoSansSC-Light"),
     url("/fonts/noto-sans-sc-v10-chinese-simplified_latin/noto-sans-sc-v10-chinese-simplified_latin-300.woff2")
       format("woff2"),
     /* Chrome 26+, Opera 23+, Firefox 39+ */
       url("/fonts/noto-sans-sc-v10-chinese-simplified_latin/noto-sans-sc-v10-chinese-simplified_latin-300.woff")
       format("woff");
   /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
-  font-display: swap;
+  font-display: fallback;
 }
 
 /* noto-sans-sc-regular - chinese-simplified_latin */
-
 @font-face {
   font-family: "思源黑体";
   font-style: normal;
   font-weight: 400;
-  src: local("Noto Sans SC Regular"), local("NotoSansSC-Regular"),
+  src: local("思源黑体"), local("SourceHanSans-Regular"), local("Source Han Sans Regular") ,local("Noto Sans SC Regular"), local("NotoSansSC-Regular"),
     url("/fonts/noto-sans-sc-v10-chinese-simplified_latin/noto-sans-sc-v10-chinese-simplified_latin-regular.woff2")
       format("woff2"),
     /* Chrome 26+, Opera 23+, Firefox 39+ */
       url("/fonts/noto-sans-sc-v10-chinese-simplified_latin/noto-sans-sc-v10-chinese-simplified_latin-regular.woff")
       format("woff");
   /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
-  font-display: swap;
+  font-display: fallback;
 }
 
 /* noto-serif-sc-regular - chinese-simplified_latin */
-
 @font-face {
   font-family: "思源宋体";
   font-style: normal;
   font-weight: 400;
-  src: local("Noto Serif SC"), local("NotoSerifSC-Regular"),
+  src: local("思源宋体"), local("SourceHanSerifSC-Regular"),local("Source Han Serif SC"),local("Source Han Serif SC Regular"),local("Noto Serif SC"), local("NotoSerifSC-Regular"),
     url("/font/noto-serif-sc-v7-chinese-simplified_latin/noto-serif-sc-v7-chinese-simplified_latin-regular.woff2")
       format("woff2"),
     /* Chrome 26+, Opera 23+, Firefox 39+ */
       url("/font/noto-serif-sc-v7-chinese-simplified_latin/noto-serif-sc-v7-chinese-simplified_latin-regular.woff")
       format("woff");
   /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
-  font-display: swap;
+  font-display: fallback;
 }
 
 /* noto-serif-sc-600 - chinese-simplified_latin */
-
 @font-face {
   font-family: "思源宋体";
   font-style: normal;
   font-weight: 600;
-  src: local("Noto Serif SC SemiBold"), local("NotoSerifSC-SemiBold"),
+  src: local("思源宋体 SemiBold"), local("SourceHanSerifSC-SemiBold"),local("Source Han Serif SC SemiBold"), local("Noto Serif SC SemiBold"), local("NotoSerifSC-SemiBold"),
     url("/font/noto-serif-sc-v7-chinese-simplified_latin/noto-serif-sc-v7-chinese-simplified_latin-600.woff2")
       format("woff2"),
     /* Chrome 26+, Opera 23+, Firefox 39+ */
       url("/font/noto-serif-sc-v7-chinese-simplified_latin/noto-serif-sc-v7-chinese-simplified_latin-600.woff")
       format("woff");
   /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
-  font-display: swap;
+  font-display: fallback;
 }
 
 /* noto-serif-sc-900 - chinese-simplified_latin */
-
 @font-face {
   font-family: "思源宋体";
   font-style: normal;
   font-weight: 900;
-  src: local("Noto Serif SC Black"), local("NotoSerifSC-Black"),
+  src: local("思源宋体 Black"), local("SourceHanSerifSC-Black"),local("Source Han Serif SC Black"),
+    local("Noto Serif SC Black"), local("NotoSerifSC-Black"),
     url("/font/noto-serif-sc-v7-chinese-simplified_latin/noto-serif-sc-v7-chinese-simplified_latin-900.woff2")
       format("woff2"),
     /* Chrome 26+, Opera 23+, Firefox 39+ */
       url("/font/noto-serif-sc-v7-chinese-simplified_latin/noto-serif-sc-v7-chinese-simplified_latin-900.woff")
       format("woff");
   /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
-  font-display: swap;
+  font-display: fallback;
 }
 
 /* 重置css */
@@ -190,6 +185,7 @@ html body {
 }
 
 #foot {
+  position: relative;
   z-index: 10;
   background-color: #3b423b;
   /* height: 70px; */
