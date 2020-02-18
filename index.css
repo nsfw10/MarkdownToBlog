@@ -14,7 +14,7 @@
   height: 100%;
 } */
 
-#column {
+#myself {
   overflow: hidden;
   position: relative;
   min-height: 424px;
@@ -23,7 +23,7 @@
   /* background: url("img/columnBG") center bottom; */
 }
 
-#columnBox {
+#myselfBox {
   overflow: hidden;
   background-color: #0d1113d2;
   height: 90%;
@@ -31,20 +31,20 @@
   margin: 1% auto;
   max-width: 960px;
 }
-#columnTitle{
+#myselfTitle{
   margin: 24px auto 5px auto;
   padding-bottom: 10px;
   width: 100%;
   max-width: 400px ;
   border-bottom:1px solid #abbbaa;
 }
-#columnTitle h2{
+#myselfTitle h2{
   font-size: 36px;
   line-height: 36px;
   text-align: center;
   color: #e5e3ce;
 }
-#columnTitle+p{
+#myselfTitle+p{
   font-size: 10px;
   line-height: 10px;
   font-weight: 300;
@@ -52,13 +52,13 @@
   color: #979685;
 }
 
-#columnContent{
+#myselfContent{
   min-height: 270px;
   margin: 20px 10px;
   position: relative;
   overflow: hidden;
 }
-#columnSelfie{
+#myselfSelfie{
   width: 100%;
   height: 240px;
   /* min-width: 200px; */
@@ -70,7 +70,7 @@
   transform: translate(0, -50%);*/
   /* overflow: hidden;  */
 }
-#columnSelfie img{
+#myselfSelfie img{
   box-sizing: border-box;
   height: 200px;
   padding: 8px;
@@ -83,25 +83,25 @@
   transform: translate(0, -50%);
   /* margin-right: 85px; */
 }
-#columnContent ul{
+#myselfContent ul{
   position: relative;
   width: 100%;
   padding-right: 20px;
   max-width: 660px;
   min-width: 336px;
 }
-#columnContent li{
+#myselfContent li{
   margin: 15px 0;
   position: relative;
 }
-#columnContent li div{
+#myselfContent li div{
   width:20%;
   min-width: 75px;
   position: absolute;
   top: 50%;
   transform: translate(0, -50%);
 }
-#columnContent li h3{
+#myselfContent li h3{
   float: right;
   font-size: 30px;
   line-height: 30px;
@@ -109,14 +109,14 @@
   min-width: 60px;
   margin-right: 7px;
 }
-#columnContent li img{
+#myselfContent li img{
   float: right;
   /* position: absolute;
   top: 50%;
   left: 22%;
   transform: translate(0, -50%); */
 }
-#columnContent li p {
+#myselfContent li p {
   float: right;
   font-family: 思源黑体;
   font-weight: 300;

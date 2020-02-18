@@ -1,3 +1,17 @@
+#desktop {
+    background: url(https://s2.ax1x.com/2020/02/17/3P8rcV.png);
+    min-height: 800px;
+    overflow: hidden;
+}
+
+#paper {
+    overflow: hidden;
+    background-color: #0d1113d2;
+    margin: 30px auto;
+    width: 90%;
+    max-width: 900px;
+}
+
 #titleFirst {
     background: url(/img/dots2L.png) 20px 32px no-repeat;
     background-size: auto 30px;

@@ -184,7 +184,7 @@ html body {
   color: #6a7c6e;
 }
 
-#foot {
+#footer {
   position: relative;
   z-index: 10;
   background-color: #3b423b;
@@ -194,12 +194,11 @@ html body {
   text-align: center;
   overflow: hidden;
 }
-#foot p {
+#footer p {
   color: #d6e0da;
   font-size: 10px;
   margin: 5px auto 10px auto;
 }
-
 #links {
   width: 100%;
   margin: 0 auto;
