@@ -27,7 +27,7 @@
 }
 
 #info{
-    margin: 20px 0 0 40px;
+    margin: 20px 40px 0 40px;
 }
 #info #labels{
     float: left;
@@ -42,7 +42,7 @@
     padding: 0 5px;
     border: 1px solid /* #acb3aa */#bdb88e;
     border-radius: 3px;
-    margin: 2px 10px 0 0;
+    margin: 2px 10px 10px 0;
 }
 #info #author{
     float: left;
@@ -52,7 +52,13 @@
     color: /* #acb3aa */#bdb88e;
     padding: 0 0 5px 12px;
     border-left: 3px solid /* #acb3aa */#bdb88e;
-    margin: 0 0 20px 0px ;
+}
+#info #timeInclude{
+    float: right;
+    font-size: 16px;
+    line-height: 24px;
+    color: /* #acb3aa */#bdb88e;
+    /* padding: 0 0 5px 12px; */
 }
 
 #article {

@@ -100,6 +100,7 @@ img {
 }
 
 html body {
+  background-color: #101110;
   font-family: 思源宋体, 思源黑体, 微软雅黑, 宋体, sans-serif;
   overflow-x: hidden;
   width: 100%;
@@ -151,9 +152,9 @@ html body {
   color: #aabcb2;
   font-weight: 900;
 }
-#logo h1 :hover {
+/* #logo h1:hover {
   color: #d4dad7;
-}
+} */
 #logo p {
   position: relative;
   top: 7px;
@@ -180,9 +181,9 @@ html body {
 #header ul:last-child {
   border-right: 1px solid #6a7c6e;
 }
-#header ul li a {
+/* #header ul li a {
   color: #6a7c6e;
-}
+} */
 
 #footer {
   position: relative;

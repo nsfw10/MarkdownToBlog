@@ -38,7 +38,7 @@
 }
 
 #info{
-    margin: 10px 0 5px 10px;
+    margin: 10px 10px 5px 10px;
 }
 #info #labels{
     float: left;
@@ -64,4 +64,17 @@
     padding: 0 0 5px 12px;
     border-left: 3px solid /* #acb3aa */#bdb88e;
     margin: 0 0 0 0 ;
+}
+#info #timeInclude{
+    float: right;
+    font-size: 16px;
+    line-height: 24px;
+    color: /* #acb3aa */#bdb88e;
+    /* padding: 0 0 5px 12px; */
+}
+#introduction{
+    font-size: 16px;
+    line-height: 20px;
+    color: #e7e5c8;
+    margin: 10px 0 15px 20px;
 }
