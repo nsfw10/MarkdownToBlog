@@ -29,8 +29,9 @@
     margin: 20px auto;
 }
 #columns>li h3{
-    font-size: 34px;
-    line-height: 34px;
+    font-size: 32px;
+    letter-spacing: 1px;
+    line-height: 32px;
     color: #e7e5c8;
     border-bottom: 1px #807e69 solid;
     padding: 0 0 15px 20px;

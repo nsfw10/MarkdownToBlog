@@ -4,16 +4,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>社蕙主义-收藏</title>
+    <title>CSS学习笔记</title>
     <!-- ICON -->
     <link rel="icon" href="https://s2.ax1x.com/2020/02/17/3P0GPU.png" type="image/x-icon" />
     <link rel="shortcut icon" href="https://s2.ax1x.com/2020/02/17/3P0GPU.png" type="image/x-icon" />
     <link rel="bookmark" href="https://s2.ax1x.com/2020/02/17/3P0GPU.png" type="image/x-icon" />
     <!-- CSS -->
-    <link rel="stylesheet" href="/commonCSS/blogCommon.css">
-    <link rel="stylesheet" href="/commonCSS/article.css">
-    
-    <script src="https://cdn.jsdelivr.net/npm/showdown@1.9.0/dist/showdown.min.js"></script>
+    <link rel="stylesheet" href="/commonConfigs/blogCommon.css">
+    <link rel="stylesheet" href="/commonConfigs/article.css">
 </head>
 
 <body>
@@ -32,7 +30,7 @@
     </div>
 
     <div id="desktop" class="containerFluid">
-        <div id="paper" class="container">
+        <div id="paper">
             <div id="article"></div>
         </div>
     </div>
@@ -55,37 +53,9 @@
         <p>由社蕙设计 Copyright © 2020 Non-sense 图片素材均取自@NoriZC</p>
     </div>
 
-    <!-- <script>
-        var converter = new showdown.Converter(),
-            text = "### CSS 文字样式\n字体类型：`font-family`\n- 英文字体\n- 中文字体（中英文一般都会被改变）\n- 衬线字体与非衬线体：有无棱角\n- 字体名字中出现空格则必须加单引号",
-        html = converter.makeHtml(text);
-        document.getElementById("article").innerHTML = html;
-    </script> -->
-
-    <script>
-        let text;
-        showdown.setOption("headerLevelStart",2);
-        function readMD() {
-            var xhr = new XMLHttpRequest();
-            xhr.open("get", "CSSNoteClass.md", true);
-            xhr.send();
-            xhr.onreadystatechange = function () {
-                if (xhr.readyState == 4 && xhr.status == 200) {
-                    console.log(xhr);
-                    //console.log(xhr.responseText);
-                    text = xhr.responseText;
-                    // console.log(typeof text);
-                    var converter = new showdown.Converter();
-                    html = converter.makeHtml(text);
-                    document.getElementById("article").innerHTML = html;
-                    // return xhr.responseText;
-                } else if (xhr.status == 404) {
-                    console.log(xhr.status);
-                }
-            };
-        }
-        readMD();
-    </script>
+    <!-- 引入showdown.js -->
+    <script src="https://cdn.jsdelivr.net/npm/showdown@1.9.1/dist/showdown.min.js"></script>
+    <script src="/commonConfigs/mdArticle.js"></script>
 </body>
 
 </html>
