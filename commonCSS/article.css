@@ -16,7 +16,6 @@
     background: url(/img/dots2L.png) 20px 32px no-repeat;
     background-size: auto 30px;
 }
-
 #titleFirst h2 {
     font-size: 44px;
     line-height: 44px;
@@ -30,11 +29,9 @@
 #info{
     margin: 20px 0 0 40px;
 }
-
 #info #labels{
     float: left;
 }
-
 #info #labels li{
     float: left;
     font-size: 18px;
@@ -47,7 +44,6 @@
     border-radius: 3px;
     margin: 2px 10px 0 0;
 }
-
 #info #author{
     float: left;
     font-size: 20px;
@@ -62,12 +58,10 @@
 #article {
     width: 90%;
 }
-
 #article .titles {
     background: url(/img/dots1L.png) 10px no-repeat;
     background-size: auto 26px;
 }
-
 #article h3 {
     font-size: 34px;
     line-height: 34px;
@@ -77,7 +71,6 @@
     border-top: 1.5px #e7e3bd solid;
     margin: 65px auto 0 auto;
 }
-
 #article p {
     font-size: 18px;
     font-family: 思源黑体;
@@ -88,11 +81,16 @@
     margin: 26px auto;
 }
 
+#reference~ul{
+    margin-bottom: 40px;
+}
 #reference~ul li{
-    padding: 0 0 0 18px;
     background: url(/img/dots1.png) 5px 10px no-repeat;
     background-size: 5px auto;
+    padding: 0 0 0 18px;
+    margin: 10px 0;
 }
+
 
 .note{
     font-size: 14px;
