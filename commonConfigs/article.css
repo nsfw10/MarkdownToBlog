@@ -91,6 +91,7 @@ h2 {
 }
 
 #reference~ul{
+    padding-left: 2.5em;
     margin-bottom: 40px;
 }
 #reference~ul li{

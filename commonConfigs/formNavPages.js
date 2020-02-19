@@ -40,7 +40,7 @@ loadScript(
 
 //配置showdown
 function setShowdown() {
-//   showdown.setOption("headerLevelStart", 2);
+  //   showdown.setOption("headerLevelStart", 2);
   showdown.setOption("tables", true);
   showdown.setOption("ghCompatibleHeaderId", true); //保证TOC跳转正确性
   showdown.setOption("customizedHeaderId", true);
@@ -48,13 +48,9 @@ function setShowdown() {
 
 function setUpEnv() {
   //改变标题
-  let title = window.location.search.slice(1);
+  let title = decodeURIComponent(window.location.search.slice(1));
   document.querySelector("title").innerText = title;
-  //加载CSS
-  let ArtCSS = document.createElement("link");
-  ArtCSS.rel = "stylesheet";
-  ArtCSS.href = "/commonConfigs/navPages.css";
-  document.querySelector("head").appendChild(ArtCSS);
+  document.querySelector("h2").innerText = title;
 }
 
 function readLog() {
@@ -71,8 +67,9 @@ function readLog() {
 }
 
 function analyseLog(textInput) {
-    let tempsave=textInput;
-    let columnIndex = tempsave.match("## " + window.location.search.slice(1));
-    console.log(window.location.search.slice(1));
-    console.log(columnIndex);
+  let tempsave = textInput;
+  let columnIndex = tempsave.match(
+    "## " + document.querySelector("title").innerText
+  );
+  console.log(columnIndex);
 }

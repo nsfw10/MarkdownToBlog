@@ -48,13 +48,8 @@ function setShowdown() {
 
 function setUpEnv() {
   //改变标题
-  let title = window.location.search.slice(1);
+  let title = decodeURIComponent(window.location.search.slice(1));
   document.querySelector("title").innerText = title;
-  //加载CSS
-  let ArtCSS = document.createElement("link");
-  ArtCSS.rel = "stylesheet";
-  ArtCSS.href = "/commonConfigs/article.css";
-  document.querySelector("head").appendChild(ArtCSS);
 }
 
 function readMD() {
