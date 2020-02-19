@@ -130,7 +130,7 @@ html body {
   margin: 0 auto;
 }
 
-#header {
+header {
   position: sticky;
   top: 0px;
   /* position: fixed; */
@@ -167,25 +167,25 @@ html body {
   margin: 0;
 }
 
-#header ul {
+header ul {
   float: right;
   margin: 20px 40px 25px 0px;
 }
-#header ul li {
+header ul li {
   float: left;
   line-height: 18px;
   padding: 0 21px;
   border-left: 1px solid #6a7c6e;
   font-family: 思源黑体;
 }
-#header ul:last-child {
+header ul:last-child {
   border-right: 1px solid #6a7c6e;
 }
-/* #header ul li a {
+/* header ul li a {
   color: #6a7c6e;
 } */
 
-#footer {
+footer {
   position: relative;
   z-index: 10;
   background-color: #3b423b;
@@ -195,7 +195,7 @@ html body {
   text-align: center;
   overflow: hidden;
 }
-#footer p {
+footer p {
   color: #d6e0da;
   font-size: 10px;
   margin: 5px auto 10px auto;
