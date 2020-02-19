@@ -33,6 +33,7 @@ loadScript(
   function() {
     console.log("succeed");
     setShowdown();
+    setUpEnv();
     readMD();
   }
 );
@@ -45,9 +46,19 @@ function setShowdown() {
   showdown.setOption("customizedHeaderId", true);
 }
 
-let MDtitle = document.querySelector("title").innerText + ".md";
+function setUpEnv() {
+  //改变标题
+  let title = window.location.search.slice(1);
+  document.querySelector("title").innerText = title;
+  //加载CSS
+  let ArtCSS = document.createElement("link");
+  ArtCSS.rel = "stylesheet";
+  ArtCSS.href = "/commonConfigs/article.css";
+  document.querySelector("head").appendChild(ArtCSS);
+}
 
 function readMD() {
+  let MDtitle = document.querySelector("title").innerText + ".md";
   let xhr = new XMLHttpRequest(); //建立对象
   xhr.open("get", MDtitle, true); //打开文档
   xhr.send();
