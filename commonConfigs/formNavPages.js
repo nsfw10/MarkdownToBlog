@@ -68,8 +68,20 @@ function readLog() {
 
 function analyseLog(textInput) {
   let tempsave = textInput;
-  let columnIndex = tempsave.match(
-    "## " + document.querySelector("title").innerText
-  );
-  console.log(columnIndex);
+  let columnIndexStart = tempsave.match("## " + document.querySelector("title").innerText
+  ).index + ("## " + document.querySelector("title").innerText +"\n\n"
+  ).length;
+  let columnIndexEnd = tempsave.slice(columnIndexStart).match(/[^#]##[^#]/).index + columnIndexStart;
+  let column = tempsave.slice(columnIndexStart,columnIndexEnd);//取得##栏目中的所有内容
+  let articleIndex = column.match(/###/g);
+  for(let i=0;i<articleIndex.length;i++){
+      let article;
+      if(i==articleIndex.length){
+          article=column.slice(articleIndex[i]);
+      }
+      else{
+          article=column.slice(articleIndex[i],articleIndex[i+1]);
+      }
+      console.log(article);
+  }
 }
