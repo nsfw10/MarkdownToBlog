@@ -1,14 +1,14 @@
 let headerF = function() {
   const headerT = `
     <div id="logo" class="l">
-    <h1 class="l"><a href="./index.html">@社蕙主义</a></h1>
+    <h1 class="l"><a href="/index.html">@社蕙主义</a></h1>
     <p class="l">Megumism<br>春社野蕙，生生不息</p>
     </div>
     <ul class="nav r">
-    <li><a href="/articles/articles.html">文章</a></li>
-    <li><a href="/designs/designs.html">设计</a></li>
-    <li><a href="/resources/resources.html">资源</a></li>
-    <li><a href="/collections/collections.html">收藏</a></li>
+    <li><a href="/articles/navPages.html?文章">文章</a></li>
+    <li><a href="/articles/navPages.html?设计">设计</a></li>
+    <li><a href="/articles/navPages.html?资源">资源</a></li>
+    <li><a href="/articles/navPages.html?收藏">收藏</a></li>
     </ul>
     `;
   let header = document.querySelector("header");
@@ -40,5 +40,13 @@ let footerF = function() {
   footer.innerHTML = footerT;
 };
 
+function setUpEnv() {
+  let ArtCSS = document.createElement("link");
+  ArtCSS.rel = "stylesheet";
+  ArtCSS.href = "/commonConfigs/blogCommon.css";
+  document.querySelector("head").appendChild(ArtCSS);
+}
+
 headerF();
 footerF();
+setUpEnv();
