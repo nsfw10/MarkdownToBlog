@@ -36,6 +36,7 @@ loadScript(
     setShowdown();
     setUpEnv();
     readMD();
+    //载入prism
     loadScript("/commonConfigs/prism.js", function () {
       console.log("prism succeed")
     })

@@ -87,7 +87,7 @@ function analyseLog(textInput) {
     let h2IndexEnd =
         textInput.slice(h2IndexStart).match(/^##[^#]|[^#]##[^#]/).index +
         h2IndexStart;
-    if (h2IndexStart != h2IndexEnd) {
+    if (h2IndexStart != h2IndexEnd) {//目录中有文章
         let h2Content = textInput.slice(h2IndexStart, h2IndexEnd); //取得##栏目中的所有内容
         let h3 = h2Content.match(/###.*\n/g);
         let h3Index = h3.map(temp => h2Content.match(temp).index); //取得了##标题的位置(.map属实牛啤)
@@ -129,9 +129,9 @@ function analyseLog(textInput) {
             let columns = document.getElementById("columns");
             columns.appendChild(column);
         }
-    } else {
+    } else {//目录中无文章
         let column = document.createElement("li");
-        column.innerHTML = "<li id=\"introduction\">暂时没有上传博客</li>";
+        column.innerHTML = "<li id=\"introduction\">站主暂时没有打理这个栏目呢，请去别的栏目逛逛吧</li>";
         let columns = document.getElementById("columns");
         columns.appendChild(column);
     }

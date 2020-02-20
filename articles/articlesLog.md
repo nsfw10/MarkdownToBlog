@@ -18,10 +18,18 @@
 - 时间：2020/2/20
 - 简介：这就是本站为什么慢慢地做成 TPA 了（捂脸）。
 
+### 网页美化笔记
+
+- 标题：网页美化指北
+- 标签：Javascript、实操、日志
+- 作者：社蕙
+- 时间：2020/2/20
+- 简介：包括：网页字体库 Google-webfont-helper；Prism.js 实现各类代码的高亮。
+
 ### JS 编码与解码
 
 - 标题：JS 编码与解码
-- 标签：JavaScript、学习
+- 标签：JavaScript、笔记
 - 作者：社蕙
 - 时间：2020/2/20
 - 简介：解决了将 url?后面的 UTF-8 编码转回字符的问题。
@@ -45,7 +53,7 @@
 ### HTML note class
 
 - 标题：HTML 学习笔记
-- 标签：HTML、学习
+- 标签：HTML、笔记
 - 作者：社蕙
 - 时间：2020/2/20
 - 简介：HTML 知识点的梳理
@@ -71,6 +79,7 @@
 - [目录](#%e7%9b%ae%e5%bd%95)
   - [文章](#%e6%96%87%e7%ab%a0)
     - [纯 JS 构建网页排版引擎](#%e7%ba%af-js-%e6%9e%84%e5%bb%ba%e7%bd%91%e9%a1%b5%e6%8e%92%e7%89%88%e5%bc%95%e6%93%8e)
+    - [网页美化笔记](#%e7%bd%91%e9%a1%b5%e7%be%8e%e5%8c%96%e7%ac%94%e8%ae%b0)
     - [JS 编码与解码](#js-%e7%bc%96%e7%a0%81%e4%b8%8e%e8%a7%a3%e7%a0%81)
     - [CSS note class](#css-note-class)
     - [CSS note practice](#css-note-practice)
