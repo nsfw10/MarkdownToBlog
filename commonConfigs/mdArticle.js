@@ -60,12 +60,7 @@ function readMD() {
   xhr.send();
   xhr.onreadystatechange = function () {
     if (xhr.readyState == 4 && xhr.status == 200) {
-      analyseText(xhr.responseText, function () {
-        loadScript("/commonConfigs/prism.js", function () {
-          console.log("prism succeed");
-        })
-      }
-      );
+      analyseText(xhr.responseText);
       // writeHTML(text,"article");
       // let converter = new showdown.Converter();
       // html = converter.makeHtml(text);
@@ -77,7 +72,7 @@ function readMD() {
   };
 }
 
-function analyseText(inputText, callback) {
+function analyseText(inputText) {
   let tempSave = inputText;
   let firstTitle;
   let firstTitleIndex;
@@ -96,7 +91,10 @@ function analyseText(inputText, callback) {
   //暂时把目录吃掉了
   let mainText = tempSave.slice(TOCIndex + 2);
   writeHTML(mainText, "paper", "article");
-  callback();
+  //载入prism
+  loadScript("/commonConfigs/prism.js", function () {
+    console.log("prism succeed")
+  })
 }
 
 function writeHTML(textInput, idOfParent, idOfDivCreated = "") {
