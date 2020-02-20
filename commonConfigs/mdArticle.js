@@ -11,13 +11,13 @@ function loadScript(src, callback) {
   if (script.addEventListener) {
     script.addEventListener(
       "load",
-      function() {
+      function () {
         callback();
       },
       false
     );
   } else if (script.attachEvent) {
-    script.attachEvent("onreadystatechange", function() {
+    script.attachEvent("onreadystatechange", function () {
       var target = window.event.srcElement;
       if (target.readyState == "loaded") {
         callback();
@@ -30,11 +30,15 @@ function loadScript(src, callback) {
 //载入showdown
 loadScript(
   "https://cdn.jsdelivr.net/npm/showdown@1.9.1/dist/showdown.min.js",
-  function() {
-    console.log("succeed");
+  function () {
+    console.log("showdown succeed");
+    // hljs.initHighlightingOnLoad();
     setShowdown();
     setUpEnv();
     readMD();
+    loadScript("/commonConfigs/prism.js", function () {
+      console.log("prism succeed")
+    })
   }
 );
 
@@ -57,7 +61,7 @@ function readMD() {
   let xhr = new XMLHttpRequest(); //建立对象
   xhr.open("get", MDtitle, true); //打开文档
   xhr.send();
-  xhr.onreadystatechange = function() {
+  xhr.onreadystatechange = function () {
     if (xhr.readyState == 4 && xhr.status == 200) {
       analyseText(xhr.responseText);
       // writeHTML(text,"article");

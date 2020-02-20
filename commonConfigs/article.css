@@ -66,7 +66,7 @@ h2 {
   margin: 0 auto;
 }
 #article h3 {
-  background: url(/img/dots1L.png) 10px no-repeat;
+  background: url(/img/dots1L.png) 5px no-repeat;
   background-size: auto 26px;
   font-size: 34px;
   line-height: 34px;
@@ -108,11 +108,15 @@ h2 {
   margin: 26px auto;
 }
 
-#reference ~ ul {
+#article ul {
   padding-left: 2.5em;
   margin-bottom: 40px;
 }
-#reference ~ ul li {
+#article ul li {
+  font-size: 18px;
+  font-family: 思源黑体;
+  font-weight: 300;
+  line-height: 26px;
   background: url(/img/dots1.png) 5px 10px no-repeat;
   background-size: 5px auto;
   padding: 0 0 0 18px;
