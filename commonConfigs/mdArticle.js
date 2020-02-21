@@ -54,7 +54,7 @@ function setUpEnv() {
 }
 
 function readMD() {
-  let MDtitle = document.querySelector("title").innerText + ".md";
+  let MDtitle = "/articles/" + document.querySelector("title").innerText + ".md";
   let xhr = new XMLHttpRequest(); //建立对象
   xhr.open("get", MDtitle, true); //打开文档
   xhr.send();

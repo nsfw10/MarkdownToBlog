@@ -67,7 +67,7 @@ function readLog() {
 }
 
 let columnTemplate = (filename, title, author, timeInclude, introduction, labels) => `
-<a href="Contents/articleDisplay.html?${filename}">
+<a href="/articleDisplay.html?${filename}">
     <h3>${title}</h3>
 </a>
 <ul id="info" class="clear">

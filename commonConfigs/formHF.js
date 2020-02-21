@@ -1,14 +1,14 @@
-let headerF = function() {
+let headerF = function () {
   const headerT = `
     <div id="logo" class="l">
     <h1 class="l"><a href="/index.html">@社蕙主义</a></h1>
     <p class="l">Megumism<br>春社野蕙，生生不息</p>
     </div>
     <ul class="nav r">
-    <li><a href="/articles/navPages.html?文章">文章</a></li>
-    <li><a href="/articles/navPages.html?设计">设计</a></li>
-    <li><a href="/articles/navPages.html?资源">资源</a></li>
-    <li><a href="/articles/navPages.html?收藏">收藏</a></li>
+    <li><a href="/navPages.html?文章">文章</a></li>
+    <li><a href="/navPages.html?设计">设计</a></li>
+    <li><a href="/navPages.html?资源">资源</a></li>
+    <li><a href="/navPages.html?收藏">收藏</a></li>
     </ul>
     `;
   let header = document.querySelector("header");
@@ -16,7 +16,7 @@ let headerF = function() {
   header.innerHTML = headerT;
 };
 
-let footerF = function() {
+let footerF = function () {
   const footerT = `
     <div id="links" class="clear">
     <h2>———友情链接———</h2>
